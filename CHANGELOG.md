@@ -3,7 +3,9 @@
 <!--
 - []  ([#](https://github.com/airbnb/react-dates/pull/))
 -->
+## 22.0.0
 
+- [new] switch to date-fns via driver ([#1](https://github.com/Miruzz/rd-fns/pull/1))
 ## 21.8.0
 
 - [new] Add option to allow days violating min nights to be clicked ([#1913](https://github.com/airbnb/react-dates/pull/1913))
