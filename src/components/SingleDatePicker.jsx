@@ -5,6 +5,7 @@ import { forbidExtraProps } from 'airbnb-prop-types';
 import { addEventListener } from 'consolidated-events';
 import isTouchDevice from 'is-touch-device';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { darken } from 'color2k';
 
 import { driver } from '../drivers/driver';
 import formats from '../drivers/formats';
@@ -54,6 +55,7 @@ const defaultProps = {
   id: 'date',
   placeholder: 'Date',
   ariaLabel: undefined,
+  titleText: undefined,
   disabled: false,
   required: false,
   readOnly: false,
@@ -550,6 +552,7 @@ class SingleDatePicker extends React.PureComponent {
       id,
       placeholder,
       ariaLabel,
+      titleText,
       disabled,
       focused,
       required,
@@ -591,6 +594,7 @@ class SingleDatePicker extends React.PureComponent {
         id={id}
         placeholder={placeholder}
         ariaLabel={ariaLabel}
+        titleText={titleText}
         focused={focused}
         isFocused={isInputFocused}
         disabled={disabled}
@@ -706,12 +710,12 @@ export default withStyles(({ reactDates: { color, zIndex } }) => ({
     zIndex: zIndex + 2,
 
     ':hover': {
-      color: `darken(${color.core.grayLighter}, 10%)`,
+      color: darken(color.core.grayLighter, 0.1),
       textDecoration: 'none',
     },
 
     ':focus': {
-      color: `darken(${color.core.grayLighter}, 10%)`,
+      color: darken(color.core.grayLighter, 0.1),
       textDecoration: 'none',
     },
   },

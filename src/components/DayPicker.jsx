@@ -342,7 +342,8 @@ class DayPicker extends React.PureComponent {
       }
     }
 
-    if (renderMonthText !== prevRenderMonthText) {
+    if (renderMonthText !== null && prevRenderMonthText !== null
+        && renderMonthText(currentMonth) !== prevRenderMonthText(currentMonth)) {
       this.setState({
         monthTitleHeight: null,
       });
