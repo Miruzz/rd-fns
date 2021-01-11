@@ -127,7 +127,8 @@ describe('DateInput', () => {
         const dateString = 'foo123';
         const wrapper = shallow(<DateInput id="date" />).dive();
         wrapper.setState({ dateString });
-        wrapper.instance().UNSAFE_componentWillReceiveProps({ displayValue: '1991-07-13' });
+        wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ displayValue: '1991-07-13' });
         expect(wrapper.state()).to.have.property('dateString', '');
       });
     });
@@ -137,7 +138,8 @@ describe('DateInput', () => {
         const dateString = 'foo123';
         const wrapper = shallow(<DateInput id="date" />).dive();
         wrapper.setState({ dateString });
-        wrapper.instance().UNSAFE_componentWillReceiveProps({ displayValue: null });
+        wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ displayValue: null });
         expect(wrapper.state()).to.have.property('dateString', dateString);
       });
     });

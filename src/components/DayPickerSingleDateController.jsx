@@ -218,6 +218,7 @@ export default class DayPickerSingleDateController extends React.PureComponent {
     this.isTouchDevice = isTouchDevice();
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       date,
@@ -346,6 +347,7 @@ export default class DayPickerSingleDateController extends React.PureComponent {
     }
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillUpdate() {
     this.today = driver.now();
   }

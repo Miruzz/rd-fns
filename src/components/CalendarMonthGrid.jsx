@@ -141,6 +141,7 @@ class CalendarMonthGrid extends React.PureComponent {
     );
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { initialMonth, numberOfMonths, orientation } = nextProps;
     const { months } = this.state;

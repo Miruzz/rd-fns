@@ -7,7 +7,6 @@ import toISOMonthString from '../../src/utils/toISOMonthString';
 import momentDriver from '../../src/drivers/moment/driver';
 import { setDriver } from '../../src/drivers/driver';
 
-
 describe('#toISOMonthString', () => {
   beforeEach(() => setDriver(momentDriver));
 

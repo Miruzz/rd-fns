@@ -91,6 +91,7 @@ class DayPickerKeyboardShortcuts extends React.PureComponent {
     this.onKeyDown = this.onKeyDown.bind(this);
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { phrases } = this.props;
     if (nextProps.phrases !== phrases) {

@@ -111,6 +111,7 @@ class CalendarMonth extends React.PureComponent {
     this.setMonthTitleHeightTimeout = setTimeout(this.setMonthTitleHeight, 0);
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { month, enableOutsideDays, firstDayOfWeek } = nextProps;
     const {

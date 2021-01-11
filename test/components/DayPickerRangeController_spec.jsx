@@ -113,11 +113,12 @@ describe('DayPickerRangeController', () => {
             );
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
             getStateForNewMonthSpy.resetHistory();
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    initialVisibleMonth: () => moment(),
+  });
             expect(getStateForNewMonthSpy.callCount).to.equal(1);
           });
 
@@ -130,11 +131,12 @@ describe('DayPickerRangeController', () => {
             getStateForNewMonthStub.returns({ currentMonth, visibleDays: {} });
 
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    initialVisibleMonth: () => moment(),
+  });
             expect(wrapper.instance().state.currentMonth).to.equal(currentMonth);
           });
 
@@ -148,11 +150,12 @@ describe('DayPickerRangeController', () => {
             getStateForNewMonthStub.returns({ currentMonth, visibleDays });
 
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    initialVisibleMonth: () => moment(),
+  });
             expect(wrapper.instance().state.visibleDays).to.equal(visibleDays);
           });
         });
@@ -165,11 +168,12 @@ describe('DayPickerRangeController', () => {
             );
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
             getStateForNewMonthSpy.resetHistory();
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: null,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: null,
+    initialVisibleMonth: () => moment(),
+  });
             expect(getStateForNewMonthSpy.callCount).to.equal(0);
           });
 
@@ -183,11 +187,12 @@ describe('DayPickerRangeController', () => {
 
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
             wrapper.setState({ currentMonth });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: null,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: null,
+    initialVisibleMonth: () => moment(),
+  });
             expect(wrapper.instance().state.currentMonth).to.equal(currentMonth);
           });
 
@@ -201,11 +206,12 @@ describe('DayPickerRangeController', () => {
 
             const wrapper = shallow(<DayPickerRangeController {...props} focusedInput={null} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: null,
-              initialVisibleMonth: () => moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: null,
+    initialVisibleMonth: () => moment(),
+  });
             expect(wrapper.instance().state.visibleDays).to.equal(visibleDays);
           });
         });
@@ -219,10 +225,11 @@ describe('DayPickerRangeController', () => {
           );
           const wrapper = shallow(<DayPickerRangeController {...props} />);
           getStateForNewMonthSpy.resetHistory();
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            numberOfMonths: 5,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    numberOfMonths: 5,
+  });
           expect(getStateForNewMonthSpy.callCount).to.equal(1);
         });
 
@@ -235,10 +242,11 @@ describe('DayPickerRangeController', () => {
           getStateForNewMonthStub.returns({ currentMonth, visibleDays: {} });
 
           const wrapper = shallow(<DayPickerRangeController {...props} />);
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            numberOfMonths: 5,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    numberOfMonths: 5,
+  });
           expect(wrapper.instance().state.currentMonth).to.equal(currentMonth);
         });
 
@@ -252,10 +260,11 @@ describe('DayPickerRangeController', () => {
           getStateForNewMonthStub.returns({ currentMonth, visibleDays });
 
           const wrapper = shallow(<DayPickerRangeController {...props} />);
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            numberOfMonths: 5,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    numberOfMonths: 5,
+  });
           expect(wrapper.instance().state.visibleDays).to.equal(visibleDays);
         });
       });
@@ -265,10 +274,11 @@ describe('DayPickerRangeController', () => {
           const getStateForNewMonthSpy = sinon.spy(DayPickerRangeController.prototype, 'getStateForNewMonth');
           const wrapper = shallow(<DayPickerRangeController {...props} />);
           getStateForNewMonthSpy.resetHistory();
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            enableOutsideDays: true,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    enableOutsideDays: true,
+  });
           expect(getStateForNewMonthSpy.callCount).to.equal(1);
         });
 
@@ -278,10 +288,11 @@ describe('DayPickerRangeController', () => {
           getStateForNewMonthStub.returns({ currentMonth, visibleDays: {} });
 
           const wrapper = shallow(<DayPickerRangeController {...props} />);
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            enableOutsideDays: true,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    enableOutsideDays: true,
+  });
           expect(wrapper.instance().state.currentMonth).to.equal(currentMonth);
         });
 
@@ -292,10 +303,11 @@ describe('DayPickerRangeController', () => {
           getStateForNewMonthStub.returns({ currentMonth, visibleDays });
 
           const wrapper = shallow(<DayPickerRangeController {...props} />);
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            enableOutsideDays: true,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    enableOutsideDays: true,
+  });
           expect(wrapper.instance().state.visibleDays).to.equal(visibleDays);
         });
       });
@@ -318,10 +330,11 @@ describe('DayPickerRangeController', () => {
             />
           ));
           deleteModifierFromRangeSpy.resetHistory();
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            startDate: nextStartDate,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: nextStartDate,
+  });
           const afterHoverStartCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'after-hovered-start');
           expect(afterHoverStartCalls.length).to.equal(1);
           expect(isSameDay(afterHoverStartCalls[0].args[1], dayAfterStartDate)).to.equal(true);
@@ -347,10 +360,11 @@ describe('DayPickerRangeController', () => {
           ));
           deleteModifierSpy.resetHistory();
           addModifierSpy.resetHistory();
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            endDate: nextEndDate,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    endDate: nextEndDate,
+  });
           const selectedEndNoStartDateDelete = getCallsByModifier(deleteModifierSpy, 'selected-end-no-selected-start');
           expect(selectedEndNoStartDateDelete.length).to.equal(1);
           expect(isSameDay(selectedEndNoStartDateDelete[0].args[1], endDate)).to.equal(true);
@@ -374,10 +388,11 @@ describe('DayPickerRangeController', () => {
 
           getStateForNewMonthSpy.resetHistory();
 
-          wrapper.instance().UNSAFE_componentWillReceiveProps({
-            ...props,
-            endDate: nextEndDate,
-          });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    endDate: nextEndDate,
+  });
         });
       });
     });
@@ -389,7 +404,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const startDate = today;
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate });
             expect(getCallsByModifier(addModifierSpy, 'selected-start').length).to.equal(0);
           });
 
@@ -397,7 +413,8 @@ describe('DayPickerRangeController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifier');
             const startDate = today;
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate });
             expect(getCallsByModifier(deleteModifierSpy, 'selected-start').length).to.equal(0);
           });
         });
@@ -408,7 +425,8 @@ describe('DayPickerRangeController', () => {
             const startDate = today;
             const newStartDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
             const selectedStartCalls = getCallsByModifier(deleteModifierSpy, 'selected-start');
             expect(selectedStartCalls.length).to.equal(1);
             expect(selectedStartCalls[0].args[1]).to.equal(startDate);
@@ -419,7 +437,8 @@ describe('DayPickerRangeController', () => {
             const startDate = today;
             const newStartDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
             const selectedStartCalls = getCallsByModifier(addModifierSpy, 'selected-start');
             expect(selectedStartCalls.length).to.equal(1);
             expect(selectedStartCalls[0].args[1]).to.equal(newStartDate);
@@ -433,7 +452,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const endDate = today;
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate });
             expect(getCallsByModifier(addModifierSpy, 'selected-end').length).to.equal(0);
           });
 
@@ -441,7 +461,8 @@ describe('DayPickerRangeController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifier');
             const endDate = today;
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate });
             expect(getCallsByModifier(deleteModifierSpy, 'selected-end').length).to.equal(0);
           });
         });
@@ -452,7 +473,8 @@ describe('DayPickerRangeController', () => {
             const endDate = today;
             const newEndDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
             const selectedEndCalls = getCallsByModifier(deleteModifierSpy, 'selected-end');
             expect(selectedEndCalls.length).to.equal(1);
             expect(selectedEndCalls[0].args[1]).to.equal(endDate);
@@ -463,7 +485,8 @@ describe('DayPickerRangeController', () => {
             const endDate = today;
             const newEndDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
             const selectedEndCalls = getCallsByModifier(addModifierSpy, 'selected-end');
             expect(selectedEndCalls.length).to.equal(1);
             expect(selectedEndCalls[0].args[1]).to.equal(newEndDate);
@@ -478,7 +501,8 @@ describe('DayPickerRangeController', () => {
               const deleteModifierFromRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifierFromRange');
               const endDate = moment().add(10, 'days');
               const wrapper = shallow(<DayPickerRangeController {...props} startDate={today} />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: null, endDate });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: null, endDate });
               const hoverSpanCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-span');
               expect(hoverSpanCalls.length).to.equal(0);
             });
@@ -489,7 +513,8 @@ describe('DayPickerRangeController', () => {
               const deleteModifierFromRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifierFromRange');
               const startDate = today;
               const wrapper = shallow(<DayPickerRangeController {...props} />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate, endDate: null });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate, endDate: null });
               const hoverSpanCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-span');
               expect(hoverSpanCalls.length).to.equal(0);
             });
@@ -502,7 +527,8 @@ describe('DayPickerRangeController', () => {
               const endDate = today.clone().add(10, 'days');
               const dayAfterEndDate = endDate.clone().add(1, 'day');
               const wrapper = shallow(<DayPickerRangeController {...props} />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate, endDate });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate, endDate });
               const hoverSpanCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-span');
               expect(hoverSpanCalls.length).to.equal(1);
               expect(hoverSpanCalls[0].args[1]).to.equal(startDate);
@@ -524,11 +550,12 @@ describe('DayPickerRangeController', () => {
               const wrapper = shallow((
                 <DayPickerRangeController {...props} startDate={startDate} endDate={endDate} />
               ));
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate: newStartDate,
-                endDate,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: newStartDate,
+    endDate,
+  });
               const selectedSpanCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'selected-span');
               expect(selectedSpanCalls.length).to.equal(1);
               expect(selectedSpanCalls[0].args[1]).to.equal(startDate);
@@ -546,11 +573,12 @@ describe('DayPickerRangeController', () => {
               const wrapper = shallow((
                 <DayPickerRangeController {...props} startDate={startDate} endDate={endDate} />
               ));
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate: newStartDate,
-                endDate,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: newStartDate,
+    endDate,
+  });
               const selectedStartCalls = getCallsByModifier(addModifierToRangeSpy, 'selected-span');
               expect(selectedStartCalls.length).to.equal(1);
               expect(isSameDay(selectedStartCalls[0].args[1], dayAfterStartDate)).to.equal(true);
@@ -569,11 +597,12 @@ describe('DayPickerRangeController', () => {
               const wrapper = shallow((
                 <DayPickerRangeController {...props} startDate={startDate} endDate={endDate} />
               ));
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                endDate: moment().add(11, 'day'),
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    endDate: moment().add(11, 'day'),
+  });
               const selectedSpanCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'selected-span');
               expect(selectedSpanCalls.length).to.equal(1);
               expect(selectedSpanCalls[0].args[1]).to.equal(startDate);
@@ -593,11 +622,12 @@ describe('DayPickerRangeController', () => {
                 startDate={startDate}
                 endDate={endDate}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                endDate: newEndDate,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    endDate: newEndDate,
+  });
               const selectedSpanCalls = getCallsByModifier(addModifierToRangeSpy, 'selected-span');
               expect(selectedSpanCalls.length).to.equal(1);
               expect(isSameDay(selectedSpanCalls[0].args[1], dayAfterStartDate)).to.equal(true);
@@ -612,7 +642,8 @@ describe('DayPickerRangeController', () => {
           it('calls addModifierToRange with `after-hovered-start`', () => {
             const addModifierToRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifierToRange');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: moment() });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: moment() });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(afterHoverStartCalls.length).to.equal(1);
           });
@@ -622,7 +653,8 @@ describe('DayPickerRangeController', () => {
             const startDate = moment();
             const startSpan = toISODateString(startDate.clone().add(1, 'day'));
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(toISODateString(afterHoverStartCalls[0].args[1])).to.equal(startSpan);
           });
@@ -635,7 +667,8 @@ describe('DayPickerRangeController', () => {
             const wrapper = shallow((
               <DayPickerRangeController {...props} minimumNights={minimumNights} />
             ));
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate, minimumNights });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate, minimumNights });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(toISODateString(afterHoverStartCalls[0].args[2])).to.equal(endSpan);
           });
@@ -646,7 +679,8 @@ describe('DayPickerRangeController', () => {
             const startDate = moment();
             const addModifierToRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifierToRange');
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(afterHoverStartCalls.length).to.equal(0);
           });
@@ -657,7 +691,8 @@ describe('DayPickerRangeController', () => {
             const startDate = moment();
             const addModifierToRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifierToRange');
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: null });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: null });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(afterHoverStartCalls.length).to.equal(0);
           });
@@ -667,11 +702,12 @@ describe('DayPickerRangeController', () => {
           it('does not call addModifierToRange with `after-hovered-start`', () => {
             const addModifierToRangeSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifierToRange');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              startDate: moment(),
-              endDate: moment(),
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: moment(),
+    endDate: moment(),
+  });
             const afterHoverStartCalls = getCallsByModifier(addModifierToRangeSpy, 'after-hovered-start');
             expect(afterHoverStartCalls.length).to.equal(0);
           });
@@ -691,11 +727,12 @@ describe('DayPickerRangeController', () => {
                 endDate={null}
                 focusedInput={focusedInput}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput,
+  });
               const minimumNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(0);
             });
@@ -713,12 +750,13 @@ describe('DayPickerRangeController', () => {
                 focusedInput={focusedInput}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate: moment().add(5, 'days'),
-                focusedInput,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: moment().add(5, 'days'),
+    focusedInput,
+    minimumNights,
+  });
               const minimumNightsEndSpan = startDate.clone().add(minimumNights, 'days');
               const minimumNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(1);
@@ -738,12 +776,13 @@ describe('DayPickerRangeController', () => {
                 focusedInput={START_DATE}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput,
+    minimumNights,
+  });
               const minimumNightsEndSpan = startDate.clone().add(minimumNights, 'days');
               const minimumNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(1);
@@ -763,12 +802,13 @@ describe('DayPickerRangeController', () => {
                 focusedInput={focusedInput}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput,
-                startDate,
-                minimumNights: 1,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput,
+    startDate,
+    minimumNights: 1,
+  });
               const minimumNightsEndSpan = startDate.clone().add(minimumNights, 'days');
               const minimumNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(1);
@@ -789,12 +829,13 @@ describe('DayPickerRangeController', () => {
                 startDate={startDate}
                 minimumNights={5}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate: today,
-                focusedInput: START_DATE,
-                minimumNights: 5,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate: today,
+    focusedInput: START_DATE,
+    minimumNights: 5,
+  });
               const minimumNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(0);
             });
@@ -818,12 +859,13 @@ describe('DayPickerRangeController', () => {
                 day.add(1, 'day');
               }
 
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput: START_DATE,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput: START_DATE,
+    minimumNights,
+  });
 
               const { visibleDays: newVisibleDays } = wrapper.state();
               day = moment(today);
@@ -848,12 +890,13 @@ describe('DayPickerRangeController', () => {
                 startDate={startDate}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput: END_DATE,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput: END_DATE,
+    minimumNights,
+  });
               const minimumNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'blocked-minimum-nights');
               expect(minimumNightsCalls.length).to.equal(1);
               expect(minimumNightsCalls[0].args[1]).to.equal(startDate);
@@ -868,12 +911,13 @@ describe('DayPickerRangeController', () => {
                 startDate={startDate}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput: END_DATE,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput: END_DATE,
+    minimumNights,
+  });
               const { visibleDays } = wrapper.state();
               const day = moment(today);
               for (let i = 0; i < minimumNights; i += 1) {
@@ -892,12 +936,13 @@ describe('DayPickerRangeController', () => {
                 startDate={startDate}
                 minimumNights={minimumNights}
               />);
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                startDate,
-                focusedInput: END_DATE,
-                minimumNights,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    startDate,
+    focusedInput: END_DATE,
+    minimumNights,
+  });
               const { visibleDays } = wrapper.state();
               const day = moment(today);
               for (let i = 0; i < minimumNights; i += 1) {
@@ -920,20 +965,22 @@ describe('DayPickerRangeController', () => {
               isOutsideRange={isOutsideRangeStub}
             />);
             const prevCallCount = isOutsideRangeStub.callCount;
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isOutsideRange if changed', () => {
             const isOutsideRangeStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.not.equal(0);
           });
         });
@@ -956,11 +1003,12 @@ describe('DayPickerRangeController', () => {
             const isOutsideRangeStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -969,11 +1017,12 @@ describe('DayPickerRangeController', () => {
             const isOutsideRangeStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    isOutsideRange: isOutsideRangeStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(addModifierSpy, 'blocked-out-of-range');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -983,11 +1032,12 @@ describe('DayPickerRangeController', () => {
             const isOutsideRangeStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isOutsideRange: isOutsideRangeStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(deleteModifierSpy, 'blocked-out-of-range');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -1003,20 +1053,22 @@ describe('DayPickerRangeController', () => {
               isDayBlocked={isDayBlockedStub}
             />);
             const prevCallCount = isDayBlockedStub.callCount;
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isDayBlocked if changed', () => {
             const isDayBlockedStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.not.equal(0);
           });
         });
@@ -1039,11 +1091,12 @@ describe('DayPickerRangeController', () => {
             const isDayBlockedStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -1052,11 +1105,12 @@ describe('DayPickerRangeController', () => {
             const isDayBlockedStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    isDayBlocked: isDayBlockedStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(addModifierSpy, 'blocked-calendar');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -1066,11 +1120,12 @@ describe('DayPickerRangeController', () => {
             const isDayBlockedStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isDayBlocked: isDayBlockedStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(deleteModifierSpy, 'blocked-calendar');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -1086,20 +1141,22 @@ describe('DayPickerRangeController', () => {
               isDayHighlighted={isDayHighlightedStub}
             />);
             const prevCallCount = isDayHighlightedStub.callCount;
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isDayHighlighted if changed', () => {
             const isDayHighlightedStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.not.equal(0);
           });
         });
@@ -1122,11 +1179,12 @@ describe('DayPickerRangeController', () => {
             const isDayHighlightedStub = sinon.stub();
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -1135,11 +1193,12 @@ describe('DayPickerRangeController', () => {
             const isDayHighlightedStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             const highlightedCalendarCalls = getCallsByModifier(addModifierSpy, 'highlighted-calendar');
             expect(highlightedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -1149,11 +1208,12 @@ describe('DayPickerRangeController', () => {
             const isDayHighlightedStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             const highlightedCalendarCalls = getCallsByModifier(deleteModifierSpy, 'highlighted-calendar');
             expect(highlightedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -1166,7 +1226,8 @@ describe('DayPickerRangeController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.instance().today = today;
-            wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(deleteModifierSpy, 'today');
             expect(todayCalls.length).to.equal(0);
           });
@@ -1175,7 +1236,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.instance().today = today;
-            wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(addModifierSpy, 'today');
             expect(todayCalls.length).to.equal(0);
           });
@@ -1186,7 +1248,8 @@ describe('DayPickerRangeController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'deleteModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.instance().today = moment().subtract(1, 'day');
-            wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(deleteModifierSpy, 'today');
             expect(todayCalls.length).to.equal(1);
           });
@@ -1195,7 +1258,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             wrapper.instance().today = moment().subtract(1, 'day');
-            wrapper.instance().UNSAFE_componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(addModifierSpy, 'today');
             expect(todayCalls.length).to.equal(1);
           });
@@ -1210,10 +1274,11 @@ describe('DayPickerRangeController', () => {
               {...props}
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(0);
           });
         });
@@ -1225,11 +1290,12 @@ describe('DayPickerRangeController', () => {
               {...props}
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(0);
           });
 
@@ -1240,11 +1306,12 @@ describe('DayPickerRangeController', () => {
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
             wrapper.setState({ hoverDate: today });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(1);
           });
 
@@ -1257,11 +1324,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(1);
               expect(isSameDay(hoveredStartBlockedMinNightsCalls[0].args[1], today.clone().add(1, 'days'))).to.equal(true);
@@ -1279,11 +1347,12 @@ describe('DayPickerRangeController', () => {
                 />,
               );
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1296,11 +1365,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1311,10 +1381,11 @@ describe('DayPickerRangeController', () => {
                 {...props}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(addModifierToRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1329,11 +1400,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(1);
               expect(isSameDay(hoveredStartBlockedMinNightsCalls[0].args[1], today.clone().add(1, 'days'))).to.equal(true);
@@ -1351,11 +1423,12 @@ describe('DayPickerRangeController', () => {
                 />,
               );
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1368,11 +1441,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1383,10 +1457,11 @@ describe('DayPickerRangeController', () => {
                 {...props}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+  });
               const hoveredStartBlockedMinNightsCalls = getCallsByModifier(deleteModifierFromRangeSpy, 'hovered-start-blocked-minimum-nights');
               expect(hoveredStartBlockedMinNightsCalls.length).to.equal(0);
             });
@@ -1402,10 +1477,11 @@ describe('DayPickerRangeController', () => {
               {...props}
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(0);
           });
         });
@@ -1417,11 +1493,12 @@ describe('DayPickerRangeController', () => {
               {...props}
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(0);
           });
 
@@ -1432,11 +1509,12 @@ describe('DayPickerRangeController', () => {
               getMinNightsForHoverDate={getMinNightsForHoverDateStub}
             />);
             wrapper.setState({ hoverDate: today });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
             expect(getMinNightsForHoverDateStub.callCount).to.equal(1);
           });
 
@@ -1449,11 +1527,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(addModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(1);
               expect(isSameDay(hoveredStartFirstPossibleEndCalls[0].args[1], today.clone().add(2, 'days'))).to.equal(true);
@@ -1470,11 +1549,12 @@ describe('DayPickerRangeController', () => {
                 />,
               );
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(addModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1487,11 +1567,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(addModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1502,10 +1583,11 @@ describe('DayPickerRangeController', () => {
                 {...props}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(addModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1520,11 +1602,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(deleteModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(1);
               expect(isSameDay(hoveredStartFirstPossibleEndCalls[0].args[1], today.clone().add(2, 'days'))).to.equal(true);
@@ -1541,11 +1624,12 @@ describe('DayPickerRangeController', () => {
                 />,
               );
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: START_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(deleteModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1558,11 +1642,12 @@ describe('DayPickerRangeController', () => {
                 getMinNightsForHoverDate={getMinNightsForHoverDateStub}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-                getMinNightsForHoverDate: getMinNightsForHoverDateStub,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    getMinNightsForHoverDate: getMinNightsForHoverDateStub,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(deleteModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1573,10 +1658,11 @@ describe('DayPickerRangeController', () => {
                 {...props}
               />);
               wrapper.setState({ hoverDate: today });
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                focusedInput: END_DATE,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+  });
               const hoveredStartFirstPossibleEndCalls = getCallsByModifier(deleteModifierSpy, 'hovered-start-first-possible-end');
               expect(hoveredStartFirstPossibleEndCalls.length).to.equal(0);
             });
@@ -1597,10 +1683,11 @@ describe('DayPickerRangeController', () => {
               />,
             );
             const newEndDate = endDate.clone().add(1, 'days');
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              endDate: newEndDate,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    endDate: newEndDate,
+  });
             const noSelectedStartBeforeSelectedEndCalls = getCallsByModifier(addModifierSpy, 'no-selected-start-before-selected-end');
             noSelectedStartBeforeSelectedEndCalls.forEach((eachCall) => {
               const day = eachCall.args[1];
@@ -1627,11 +1714,12 @@ describe('DayPickerRangeController', () => {
               (total, visibleDayArray) => total + Object.keys(visibleDayArray).length,
               0,
             );
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              endDate,
-              startDate: newStartDate,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    endDate,
+    startDate: newStartDate,
+  });
             const noSelectedStartBeforeSelectedEndCalls = getCallsByModifier(deleteModifierSpy, 'no-selected-start-before-selected-end');
             expect(noSelectedStartBeforeSelectedEndCalls.length).to.equal(numberOfVisibleDays);
           });
@@ -1644,7 +1732,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             const startDate = moment();
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate });
             const selectedStartNoSelectedEndCalls = getCallsByModifier(addModifierSpy, 'selected-start-no-selected-end');
             expect(selectedStartNoSelectedEndCalls.length).to.equal(1);
             expect(selectedStartNoSelectedEndCalls[0].args[1]).to.equal(startDate);
@@ -1657,7 +1746,8 @@ describe('DayPickerRangeController', () => {
             const startDate = moment();
             const wrapper = shallow(<DayPickerRangeController {...props} startDate={startDate} />);
             const newStartDate = startDate.clone().add(1, 'days');
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
             const selectedStartNoSelectedEndCalls = getCallsByModifier(deleteModifierSpy, 'selected-start-no-selected-end');
             expect(selectedStartNoSelectedEndCalls.length).to.equal(1);
             expect(selectedStartNoSelectedEndCalls[0].args[1]).to.equal(startDate);
@@ -1671,7 +1761,8 @@ describe('DayPickerRangeController', () => {
             const addModifierSpy = sinon.spy(DayPickerRangeController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerRangeController {...props} />);
             const endDate = moment();
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate });
             const selectedStartNoSelectedEndCalls = getCallsByModifier(addModifierSpy, 'selected-end-no-selected-start');
             expect(selectedStartNoSelectedEndCalls.length).to.equal(1);
             expect(selectedStartNoSelectedEndCalls[0].args[1]).to.equal(endDate);
@@ -1684,7 +1775,8 @@ describe('DayPickerRangeController', () => {
             const endDate = moment();
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
             const newEndDate = endDate.clone().add(1, 'days');
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
             const selectedStartNoSelectedEndCalls = getCallsByModifier(deleteModifierSpy, 'selected-end-no-selected-start');
             expect(selectedStartNoSelectedEndCalls.length).to.equal(1);
             expect(selectedStartNoSelectedEndCalls[0].args[1]).to.equal(endDate);
@@ -1697,7 +1789,8 @@ describe('DayPickerRangeController', () => {
             const endDate = moment();
             const wrapper = shallow(<DayPickerRangeController {...props} endDate={endDate} />);
             const newStartDate = endDate.clone().subtract(1, 'days');
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, startDate: newStartDate });
             const selectedStartNoSelectedEndCalls = getCallsByModifier(deleteModifierSpy, 'selected-end-no-selected-start');
             expect(selectedStartNoSelectedEndCalls.length).to.equal(1);
             expect(selectedStartNoSelectedEndCalls[0].args[1]).to.equal(endDate);
@@ -1720,7 +1813,8 @@ describe('DayPickerRangeController', () => {
             );
             const newEndDate = endDate.clone().add(1, 'days');
             addModifierToRangeSpy.resetHistory();
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, endDate: newEndDate });
             const beforeHoveredEndCalls = getCallsByModifier(addModifierToRangeSpy, 'before-hovered-end');
             expect(beforeHoveredEndCalls.length).to.equal(1);
             expect(toISODateString(beforeHoveredEndCalls[0].args[1])).to.equal(
@@ -1747,11 +1841,12 @@ describe('DayPickerRangeController', () => {
               );
               const newStartDate = endDate.clone().subtract(3, 'days');
               deleteModifierSpy.resetHistory();
-              wrapper.instance().UNSAFE_componentWillReceiveProps({
-                ...props,
-                endDate,
-                startDate: newStartDate,
-              });
+              wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    endDate,
+    startDate: newStartDate,
+  });
               const deleteModifierCalls = getCallsByModifier(deleteModifierSpy, 'selected-end-in-hovered-span');
               expect(deleteModifierCalls.length).to.equal(1);
               expect(deleteModifierCalls[0].args[1]).to.equal(endDate);
@@ -1776,7 +1871,8 @@ describe('DayPickerRangeController', () => {
             phrases={phrases}
           />);
           wrapper.setState({ phrases: phrasesObject });
-          wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, phrases });
+          wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, phrases });
           expect(wrapper.state().phrases).to.equal(phrasesObject);
         });
       });
@@ -1789,11 +1885,12 @@ describe('DayPickerRangeController', () => {
               phrases={phrases}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              phrases,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    phrases,
+  });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableStartDate);
           });
@@ -1806,11 +1903,12 @@ describe('DayPickerRangeController', () => {
               phrases={phrases}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              phrases,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    phrases,
+  });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableEndDate);
           });
@@ -1824,10 +1922,11 @@ describe('DayPickerRangeController', () => {
               phrases={phrases}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              phrases,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    phrases,
+  });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableDate);
           });
@@ -1843,11 +1942,12 @@ describe('DayPickerRangeController', () => {
               phrases={{}}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: START_DATE,
-              phrases,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: START_DATE,
+    phrases,
+  });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableStartDate);
           });
@@ -1861,11 +1961,12 @@ describe('DayPickerRangeController', () => {
               phrases={{}}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({
-              ...props,
-              focusedInput: END_DATE,
-              phrases,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focusedInput: END_DATE,
+    phrases,
+  });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableEndDate);
           });
@@ -1878,7 +1979,8 @@ describe('DayPickerRangeController', () => {
               phrases={{}}
             />);
             wrapper.setState({ phrases: {} });
-            wrapper.instance().UNSAFE_componentWillReceiveProps({ ...props, phrases });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, phrases });
             const newAvailableDatePhrase = wrapper.state().phrases.chooseAvailableDate;
             expect(newAvailableDatePhrase).to.equal(phrases.chooseAvailableDate);
           });

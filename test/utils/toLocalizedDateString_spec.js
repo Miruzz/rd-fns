@@ -7,7 +7,6 @@ import { setDriver } from '../../src/drivers/driver';
 import momentDriver from '../../src/drivers/moment/driver';
 import { ISO_FORMAT } from '../../src/drivers/moment/constants';
 
-
 describe('toLocalizedDateString', () => {
   beforeEach(() => {
     setDriver(momentDriver);

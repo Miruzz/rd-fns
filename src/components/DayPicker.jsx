@@ -283,6 +283,7 @@ class DayPicker extends React.PureComponent {
     this.setCalendarMonthWeeks(currentMonth);
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps, nextState) {
     const {
       hidden,
@@ -363,6 +364,7 @@ class DayPicker extends React.PureComponent {
     }
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillUpdate() {
     const { transitionDuration } = this.props;
 

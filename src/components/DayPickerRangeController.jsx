@@ -273,6 +273,7 @@ export default class DayPickerRangeController extends React.PureComponent {
     this.getFirstFocusableDay = this.getFirstFocusableDay.bind(this);
   }
 
+  // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       startDate,
