@@ -273,7 +273,7 @@ export default class DayPickerRangeController extends React.PureComponent {
     this.getFirstFocusableDay = this.getFirstFocusableDay.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const {
       startDate,
       endDate,
