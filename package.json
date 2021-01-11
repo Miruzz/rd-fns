@@ -1,5 +1,5 @@
 {
-  "name": "react-dates",
+  "name": "rd-fns",
   "version": "21.8.0",
   "description": "A responsive and accessible date range picker component built with React",
   "main": "index.js",
@@ -42,14 +42,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airbnb/react-dates.git"
+    "url": "git+https://github.com/Miruzz/rd-fns.git"
   },
   "author": "Maja Wichrowska <maja.wichrowska@airbnb.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/airbnb/react-dates/issues"
+    "url": "https://github.com/Miruzz/rd-fns/issues"
   },
-  "homepage": "https://github.com/airbnb/react-dates#readme",
+  "homepage": "https://github.com/Miruzz/rd-fns#readme",
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",

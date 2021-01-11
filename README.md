@@ -1,4 +1,6 @@
-# react-dates <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# rd-fns <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+
+## Getting Started
 
 [![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
@@ -415,4 +417,4 @@ The default interface that `react-dates` ships with is the [CSS interface](https
 [license-image]: http://img.shields.io/npm/l/react-dates.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/react-dates.svg
-[downloads-url]: http://npm-stat.com/charts.html?package=react-dates
+[downloads-url]: http://npm-stat.com/charts.html?package=rd-fns
