@@ -65,7 +65,7 @@ function format(d, withFormat = 'T') {
 
   if (!dateObj) return null;
 
-  return formatDate(d, withFormat);
+  return formatDate(dateObj, withFormat);
 }
 
 // date constructs a new DateTime object as per the driver's interface.
@@ -91,21 +91,21 @@ function startOf(d, part) {
 
   switch (part) {
     case parts.DAYS:
-      return startOfDay(d);
+      return startOfDay(dateObj);
     case parts.HOURS:
-      return startOfHour(d);
+      return startOfHour(dateObj);
     case parts.MINUTES:
-      return startOfMinute(d);
+      return startOfMinute(dateObj);
     case parts.MONTHS:
-      return startOfMonth(d);
+      return startOfMonth(dateObj);
     case parts.SECONDS:
-      return startOfSecond(d);
+      return startOfSecond(dateObj);
     case parts.WEEKDAYS:
-      return startOfWeek(d, 1);
+      return startOfWeek(dateObj, 1);
     case parts.WEEKS:
-      return startOfWeekYear(d);
+      return startOfWeekYear(dateObj);
     case parts.YEARS:
-      return startOfYear(d);
+      return startOfYear(dateObj);
     default:
       return null;
   }
@@ -119,21 +119,21 @@ function endOf(d, part) {
 
   switch (part) {
     case parts.DAYS:
-      return endOfDay(d);
+      return endOfDay(dateObj);
     case parts.HOURS:
-      return endOfHour(d);
+      return endOfHour(dateObj);
     case parts.MINUTES:
-      return endOfMinute(d);
+      return endOfMinute(dateObj);
     case parts.MONTHS:
-      return endOfMonth(d);
+      return endOfMonth(dateObj);
     case parts.SECONDS:
-      return endOfSecond(d);
+      return endOfSecond(dateObj);
     case parts.WEEKDAYS:
-      return endOfWeek(d, 1);
+      return endOfWeek(dateObj, 1);
     case parts.WEEKS:
-      return endOfISOWeekYear(d);
+      return endOfISOWeekYear(dateObj);
     case parts.YEARS:
-      return endOfYear(d);
+      return endOfYear(dateObj);
     default:
       return null;
   }
@@ -147,17 +147,18 @@ function set(d, withParts) {
 
   // normalize weekday setter in date-fns
   if (Number.isInteger(withParts.weekday)) {
-    return setDay(d, withParts.weekday, { weekStartsOn: 1 });
+    return setDay(dateObj, withParts.weekday, { weekStartsOn: 1 });
   }
 
-  return setDate(d, withParts);
+  return setDate(dateObj, withParts);
 }
 
 function add(d, durationObj) {
   const dateObj = toDateObj(d);
 
   if (!dateObj) return null;
-  return addToDate(d, durationObj);
+
+  return addToDate(dateObj, durationObj);
 }
 
 function subtract(d, durationObj) {
@@ -165,7 +166,7 @@ function subtract(d, durationObj) {
 
   if (!dateObj) return null;
 
-  return sub(d, durationObj);
+  return sub(dateObj, durationObj);
 }
 
 function diff(a, b, part) {
@@ -176,21 +177,21 @@ function diff(a, b, part) {
 
   switch (part) {
     case parts.DAYS:
-      return differenceInDays(a, b);
+      return differenceInDays(dateA, dateB);
     case parts.HOURS:
-      return differenceInHours(a, b);
+      return differenceInHours(dateA, dateB);
     case parts.MINUTES:
-      return differenceInMinutes(a, b);
+      return differenceInMinutes(dateA, dateB);
     case parts.MONTHS:
-      return differenceInMonths(a, b);
+      return differenceInMonths(dateA, dateB);
     case parts.SECONDS:
-      return differenceInSeconds(a, b);
+      return differenceInSeconds(dateA, dateB);
     case parts.WEEKDAYS:
-      return differenceInWeeks(a, b);
+      return differenceInWeeks(dateA, dateB);
     case parts.WEEKS:
-      return differenceInISOWeekYears(a, b);
+      return differenceInISOWeekYears(dateA, dateB);
     case parts.YEARS:
-      return differenceInYears(a, b);
+      return differenceInYears(dateA, dateB);
     default:
       return null;
   }
@@ -203,21 +204,21 @@ function get(d, part) {
 
   switch (part) {
     case parts.DAYS:
-      return getDay(d);
+      return getDay(dateObj);
     case parts.HOURS:
-      return getHours(d);
+      return getHours(dateObj);
     case parts.MINUTES:
-      return getMinutes(d);
+      return getMinutes(dateObj);
     case parts.MONTHS:
-      return getMonth(d);
+      return getMonth(dateObj);
     case parts.SECONDS:
-      return getSeconds(d);
+      return getSeconds(dateObj);
     case parts.WEEKDAYS:
-      return getDay(d, { weekStartsOn: 1 });
+      return getDay(dateObj, { weekStartsOn: 1 });
     case parts.WEEKS:
-      return getWeekOfMonth(d);
+      return getWeekOfMonth(dateObj);
     case parts.YEARS:
-      return getYear(d);
+      return getYear(dateObj);
     default:
       return null;
   }
@@ -225,8 +226,10 @@ function get(d, part) {
 
 function daysInMonth(d) {
   const dateObj = toDateObj(d);
+
   if (!dateObj) return null;
-  return getDaysInMonth(d);
+
+  return getDaysInMonth(dateObj);
 }
 
 function firstDayOfWeek() {
@@ -251,7 +254,11 @@ function formatString(type) {
 }
 
 function weekday(d) {
-  return getDay(d, { weekStartsOn: 1 });
+  const dateObj = toDateObj(d);
+
+  if (!dateObj) return null;
+
+  return getDay(dateObj, { weekStartsOn: 1 });
 }
 
 const driver = {
