@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { forbidExtraProps } from 'airbnb-prop-types';
-// import moment from 'moment';
 import omit from 'lodash/omit';
 
 import DayPickerSingleDateController from '../src/components/DayPickerSingleDateController';
@@ -10,7 +9,6 @@ import DayPickerSingleDateController from '../src/components/DayPickerSingleDate
 import ScrollableOrientationShape from '../src/shapes/ScrollableOrientationShape';
 
 import { HORIZONTAL_ORIENTATION } from '../src/constants';
-import isInclusivelyAfterDay from '../src/utils/isInclusivelyAfterDay';
 
 const propTypes = forbidExtraProps({
   // example props for the demo
