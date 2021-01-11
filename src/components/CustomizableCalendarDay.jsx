@@ -351,7 +351,7 @@ class CustomizableCalendarDay extends React.PureComponent {
         onKeyDown={(e) => { this.onKeyDown(day, e); }}
         tabIndex={tabIndex}
       >
-        {renderDayContents ? renderDayContents(day, modifiers) : day.format('D')}
+        {renderDayContents ? renderDayContents(day, modifiers) : driver.format(day, 'd')}
       </td>
     );
   }

@@ -10,7 +10,6 @@ import { driver, chain } from '../drivers/driver';
 import parts from '../drivers/parts';
 import formats from '../drivers/formats';
 
-
 import { DayPickerPhrases } from '../defaultPhrases';
 import getPhrasePropTypes from '../utils/getPhrasePropTypes';
 import noflip from '../utils/noflip';
@@ -825,7 +824,7 @@ class DayPicker extends React.PureComponent {
       const numberOfWeeks = getNumberOfCalendarMonthWeeks(newInvisibleMonth, firstDayOfWeek);
       this.calendarMonthWeeks = [numberOfWeeks, ...this.calendarMonthWeeks.slice(0, -1)];
     } else if (monthTransition === NEXT_TRANSITION) {
-      newMonth = driver.add(newMonth.add, { [parts.MONTHS]: 1 });
+      newMonth = driver.add(newMonth, { [parts.MONTHS]: 1 });
       if (onNextMonthClick) onNextMonthClick(newMonth);
       const newInvisibleMonth = driver.add(newMonth, { [parts.MONTHS]: numberOfMonths });
       const numberOfWeeks = getNumberOfCalendarMonthWeeks(newInvisibleMonth, firstDayOfWeek);
@@ -835,7 +834,6 @@ class DayPicker extends React.PureComponent {
     } else if (monthTransition === YEAR_SELECTION_TRANSITION) {
       if (onYearChange) onYearChange(newMonth);
     }
-
     let newFocusedDate = null;
     if (nextFocusedDate) {
       newFocusedDate = nextFocusedDate;

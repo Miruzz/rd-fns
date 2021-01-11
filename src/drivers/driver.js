@@ -1,10 +1,10 @@
 // Default driver.
-import momentDriver from './moment/driver';
+import dateFnsDriver from './date-fns/driver';
 
 // A singleton driver instance.  This allows us to expose the driver's functions
 // directly.
 // eslint-disable-next-line
-export let driver = momentDriver;
+export let driver = dateFnsDriver;
 
 export function setDriver(to) {
   // TODO: validate that this conforms to the correct type.  Ideally, we'd use
@@ -95,7 +95,6 @@ type Driver interface {
   set: (date, object: { [part: parts]: number }) => any;
   add: (date, object: { [part: parts]: number }) => any;
   subtract: (date, object: { [part: parts]: number }) => any;
-
 
   // # Getters/formatters
   get: (date, part) => number;

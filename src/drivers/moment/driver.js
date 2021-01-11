@@ -140,7 +140,7 @@ function firstDayOfWeek() {
 function formatString(type) {
   switch (type) {
     case formats.DAY:
-      return 'D';
+      return 'd';
     case formats.MONTH:
       return 'MMMM YYYY';
     case formats.WEEKDAY:
@@ -157,7 +157,6 @@ function formatString(type) {
 function weekday(d) {
   return d.weekday();
 }
-
 
 const driver = {
   datePropType: momentPropTypes.momentObj,

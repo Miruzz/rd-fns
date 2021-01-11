@@ -7,6 +7,7 @@ import raf from 'raf';
 
 import { BLOCKED_MODIFIER } from '../../src/constants';
 import CustomizableCalendarDay, { PureCustomizableCalendarDay } from '../../src/components/CustomizableCalendarDay';
+import { driver } from '../../src/drivers/driver';
 
 describe('CustomizableCalendarDay', () => {
   afterEach(() => {
@@ -17,25 +18,25 @@ describe('CustomizableCalendarDay', () => {
     it('contains formatted day for single digit days', () => {
       const firstOfMonth = moment().startOf('month');
       const wrapper = shallow(<CustomizableCalendarDay day={firstOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(firstOfMonth.format('D'));
+      expect(wrapper.text()).to.equal(firstOfMonth.format('d'));
     });
 
     it('contains formatted day for double digit days', () => {
       const lastOfMonth = moment().endOf('month');
       const wrapper = shallow(<CustomizableCalendarDay day={lastOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(lastOfMonth.format('D'));
+      expect(wrapper.text()).to.equal(lastOfMonth.format('d'));
     });
 
     it('contains arbitrary content if renderDay is provided', () => {
       const dayName = moment().format('dddd');
-      const renderDay = (day) => day.format('dddd');
+      const renderDay = (day) => driver.format(day, 'dddd');
       const wrapper = shallow(<CustomizableCalendarDay renderDayContents={renderDay} />).dive();
       expect(wrapper.text()).to.equal(dayName);
     });
 
     it('passes modifiers to renderDay', () => {
       const modifiers = new Set([BLOCKED_MODIFIER]);
-      const renderDay = (day, mods) => `${day.format('dddd')}${mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''}`;
+      const renderDay = (day, mods) => `${driver.format(day, 'dddd')}${mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''}`;
       const expected = `${moment().format('dddd')}BLOCKED`;
       const wrapper = shallow(<CustomizableCalendarDay
         renderDayContents={renderDay}

@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { withInfo } from '@storybook/addon-info';
@@ -13,6 +12,8 @@ import CustomizableCalendarDay, { defaultStyles, selectedStyles } from '../src/c
 import { NAV_POSITION_BOTTOM, VERTICAL_ORIENTATION, VERTICAL_SCROLLABLE } from '../src/constants';
 
 import DayPickerSingleDateControllerWrapper from '../examples/DayPickerSingleDateControllerWrapper';
+import { driver } from '../src/drivers/driver';
+import { addMonths, addWeeks } from 'date-fns';
 
 const dayPickerSingleDateControllerInfo = `The ${monospace('DayPickerSingleDateController')} component is a
   fully controlled version of the ${monospace('DayPicker')} that has built-in rules for selecting a
@@ -126,14 +127,14 @@ function renderNavNextButton(buttonProps) {
 }
 
 const datesList = [
-  moment(),
-  moment().add(1, 'days'),
-  moment().add(3, 'days'),
-  moment().add(9, 'days'),
-  moment().add(10, 'days'),
-  moment().add(11, 'days'),
-  moment().add(12, 'days'),
-  moment().add(13, 'days'),
+  new Date(),
+  addMonths(new Date(), 1),
+  addMonths(new Date(), 3),
+  addMonths(new Date(), 9),
+  addMonths(new Date(), 10),
+  addMonths(new Date(), 11),
+  addMonths(new Date(), 12),
+  addMonths(new Date(), 13),
 ];
 
 storiesOf('DayPickerSingleDateController', module)
@@ -153,17 +154,6 @@ storiesOf('DayPickerSingleDateController', module)
       showInput
     />
   )))
-  .add('non-english locale', withInfo()(() => {
-    moment.locale('zh-cn');
-    return (
-      <DayPickerSingleDateControllerWrapper
-        onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-        onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-        onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-        monthFormat="YYYY[年]MMMM"
-      />
-    );
-  }))
   .add('single month', withInfo()(() => (
     <DayPickerSingleDateControllerWrapper
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
@@ -172,38 +162,39 @@ storiesOf('DayPickerSingleDateController', module)
       numberOfMonths={1}
     />
   )))
-  .add('single month, custom caption', withInfo()(() => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      numberOfMonths={1}
-      renderMonthElement={({ month, onMonthSelect, onYearSelect }) => (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div>
-            <select
-              value={month.month()}
-              onChange={(e) => { onMonthSelect(month, e.target.value); }}
-            >
-              {moment.months().map((label, value) => (
-                <option value={value}>{label}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <select
-              value={month.year()}
-              onChange={(e) => { onYearSelect(month, e.target.value); }}
-            >
-              <option value={moment().year() - 1}>Last year</option>
-              <option value={moment().year()}>{moment().year()}</option>
-              <option value={moment().year() + 1}>Next year</option>
-            </select>
-          </div>
-        </div>
-      )}
-    />
-  )))
+  // TODO: refactor to date-fns
+  // .add('single month, custom caption', withInfo()(() => (
+  //   <DayPickerSingleDateControllerWrapper
+  //     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+  //     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+  //     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+  //     numberOfMonths={1}
+  //     renderMonthElement={({ month, onMonthSelect, onYearSelect }) => (
+  //       <div style={{ display: 'flex', justifyContent: 'center' }}>
+  //         <div>
+  //           <select
+  //             value={month.month()}
+  //             onChange={(e) => { onMonthSelect(month, e.target.value); }}
+  //           >
+  //             {moment.months().map((label, value) => (
+  //               <option value={value}>{label}</option>
+  //             ))}
+  //           </select>
+  //         </div>
+  //         <div>
+  //           <select
+  //             value={month.year()}
+  //             onChange={(e) => { onYearSelect(month, e.target.value); }}
+  //           >
+  //             <option value={moment().year() - 1}>Last year</option>
+  //             <option value={moment().year()}>{moment().year()}</option>
+  //             <option value={moment().year() + 1}>Next year</option>
+  //           </select>
+  //         </div>
+  //       </div>
+  //     )}
+  //   />
+  // )))
   .add('3 months', withInfo()(() => (
     <DayPickerSingleDateControllerWrapper
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
@@ -271,7 +262,7 @@ storiesOf('DayPickerSingleDateController', module)
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
       onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      initialVisibleMonth={() => moment().add(10, 'months')}
+      initialVisibleMonth={() => addMonths(new Date(), 10)}
     />
   )))
   .add('allows all days, including past days', withInfo()(() => (
@@ -287,8 +278,8 @@ storiesOf('DayPickerSingleDateController', module)
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
       onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isOutsideRange={(day) => !isInclusivelyAfterDay(day, moment())
-        || isInclusivelyAfterDay(day, moment().add(2, 'weeks'))}
+      isOutsideRange={(day) => !isInclusivelyAfterDay(day, new Date())
+        || isInclusivelyAfterDay(day, addWeeks(new Date(), 2))}
     />
   )))
   .add('with some blocked dates', withInfo()(() => (
@@ -307,20 +298,21 @@ storiesOf('DayPickerSingleDateController', module)
       isDayHighlighted={(day1) => datesList.some((day2) => isSameDay(day1, day2))}
     />
   )))
-  .add('blocks fridays', withInfo()(() => (
-    <DayPickerSingleDateControllerWrapper
-      onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
-      onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
-      onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      isDayBlocked={(day) => moment.weekdays(day.weekday()) === 'Friday'}
-    />
-  )))
+  // TODO: refactor to date-fns
+  // .add('blocks fridays', withInfo()(() => (
+  //   <DayPickerSingleDateControllerWrapper
+  //     onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
+  //     onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
+  //     onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
+  //     isDayBlocked={(day) => moment.weekdays(day.weekday()) === 'Friday'}
+  //   />
+  // )))
   .add('with custom daily details', withInfo()(() => (
     <DayPickerSingleDateControllerWrapper
       onOutsideClick={action('DayPickerSingleDateController::onOutsideClick')}
       onPrevMonthClick={action('DayPickerSingleDateController::onPrevMonthClick')}
       onNextMonthClick={action('DayPickerSingleDateController::onNextMonthClick')}
-      renderDayContents={(day) => day.format('ddd')}
+      renderDayContents={(day) => driver.format(day, 'ddd')}
     />
   )))
   .add('with custom day styles', withInfo()(() => {

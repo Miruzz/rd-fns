@@ -14,6 +14,7 @@ import {
   HORIZONTAL_ORIENTATION,
   START_DATE,
 } from '../../src/constants';
+import { driver } from '../../src/drivers/driver';
 
 const describeIfWindow = typeof document === 'undefined' ? describe.skip : describe;
 
@@ -733,13 +734,13 @@ describe('DateRangePicker', () => {
         const dayPicker = wrapper.find(DayPickerRangeController);
         const dayPickerStartDateOffset = dayPicker.props().startDateOffset(startDate);
 
-        expect(dayPickerStartDateOffset.format()).to.equal(startDate.format());
+        expect(driver.format(dayPickerStartDateOffset)).to.equal(driver.format(startDate));
       });
     });
 
     describe('endDateOffset is passed in', () => {
       it('Should pass endDateOffset to DayPickerRangeController', () => {
-        const endDate = moment('2018-10-17', 'YYYY-MM-DD');
+        const endDate = moment('2018-10-17', 'yyyy-MM-dd');
         const onDatesChangeStub = sinon.stub();
         const wrapper = shallow((
           <DateRangePicker

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import momentPropTypes from 'react-moment-proptypes';
-import moment from 'moment';
+// import moment from 'moment';
 import omit from 'lodash/omit';
 
 import SingleDatePicker from '../src/components/SingleDatePicker';
@@ -14,7 +13,6 @@ import isInclusivelyAfterDay from '../src/utils/isInclusivelyAfterDay';
 const propTypes = {
   // example props for the demo
   autoFocus: PropTypes.bool,
-  initialDate: momentPropTypes.momentObj,
 
   ...omit(SingleDatePickerShape, [
     'date',
@@ -69,12 +67,12 @@ const defaultProps = {
   renderDayContents: null,
   enableOutsideDays: false,
   isDayBlocked: () => false,
-  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
+  // isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
   isDayHighlighted: () => {},
 
   // internationalization props
-  displayFormat: () => moment.localeData().longDateFormat('L'),
-  monthFormat: 'MMMM YYYY',
+  // displayFormat: () => moment.localeData().longDateFormat('L'),
+  monthFormat: 'MMMM yyyy',
   phrases: SingleDatePickerPhrases,
 };
 

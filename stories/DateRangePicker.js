@@ -1,6 +1,4 @@
 import React from 'react';
-import moment from 'moment';
-import momentJalaali from 'moment-jalaali';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 import DirectionProvider, { DIRECTIONS } from 'react-with-direction/dist/DirectionProvider';
@@ -72,7 +70,6 @@ storiesOf('DateRangePicker (DRP)', module)
     </div>
   )))
   .add('non-english locale', withInfo()(() => {
-    moment.locale('zh-cn');
     return (
       <DateRangePickerWrapper
         showClearDates
@@ -83,20 +80,6 @@ storiesOf('DateRangePicker (DRP)', module)
           closeDatePicker: '关闭',
           clearDates: '清除日期',
         }}
-      />
-    );
-  }))
-  .add('non-english locale (Persian)', withInfo()(() => {
-    moment.locale('fa');
-    momentJalaali.loadPersian({ dialect: 'persian-modern', usePersianDigits: true });
-    return (
-      <DateRangePickerWrapper
-        isRTL
-        stateDateWrapper={momentJalaali}
-        startDatePlaceholderText="تاریخ شروع"
-        endDatePlaceholderText="تاریخ پایان"
-        renderMonthText={month => momentJalaali(month).format('jMMMM jYYYY')}
-        renderDayContents={day => momentJalaali(day).format('jD')}
       />
     );
   }))
@@ -116,12 +99,5 @@ storiesOf('DateRangePicker (DRP)', module)
     <DateRangePickerWrapper
       orientation={VERTICAL_ORIENTATION}
       verticalHeight={568}
-    />
-  )))
-  .add('with navigation blocked (minDate and maxDate)', withInfo()(() => (
-    <DateRangePickerWrapper
-      minDate={moment().subtract(2, 'months').startOf('month')}
-      maxDate={moment().add(2, 'months').endOf('month')}
-      numberOfMonths={2}
     />
   )));

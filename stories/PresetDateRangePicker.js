@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import moment from 'moment';
 
 import PresetDateRangePicker from '../examples/PresetDateRangePicker';
 
 import InfoPanelDecorator, { monospace } from './InfoPanelDecorator';
+import { addDays, addMonths, addWeeks } from 'date-fns';
 
 const presetDateRangePickerControllerInfo = `The ${monospace('PresetDateRangePicker')} component is not
   exported by ${monospace('react-dates')}. It is instead an example of how you might use the
@@ -16,8 +16,8 @@ const presetDateRangePickerControllerInfo = `The ${monospace('PresetDateRangePic
   <a href="https://github.com/airbnb/react-dates/blob/master/stories/PresetDateRangePicker.js">
   here</a>.`;
 
-const today = moment();
-const tomorrow = moment().add(1, 'day');
+const today = new Date();
+const tomorrow = addDays(new Date(), 1);
 const presets = [{
   text: 'Today',
   start: today,
@@ -31,12 +31,12 @@ const presets = [{
 {
   text: 'Next Week',
   start: today,
-  end: moment().add(1, 'week'),
+  end: addWeeks(new Date(), 1),
 },
 {
   text: 'Next Month',
   start: today,
-  end: moment().add(1, 'month'),
+  end: addMonths(new Date(), 1),
 }];
 
 storiesOf('PresetDateRangePicker', module)

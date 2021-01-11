@@ -1259,12 +1259,12 @@ export default class DayPickerRangeController extends React.PureComponent {
 
   isFirstDayOfWeek(day) {
     const { firstDayOfWeek } = this.props;
-    return day.day() === (firstDayOfWeek || driver.firstDayOfWeek());
+    return driver.get(day, parts.DAYS) === (firstDayOfWeek || driver.firstDayOfWeek());
   }
 
   isLastDayOfWeek(day) {
     const { firstDayOfWeek } = this.props;
-    return day.day() === ((firstDayOfWeek || driver.firstDayOfWeek()) + 6) % 7;
+    return driver.get(day, parts.DAYS) === ((firstDayOfWeek || driver.firstDayOfWeek()) + 6) % 7;
   }
 
   isFirstPossibleEndDateForHoveredStartDate(day, hoverDate) {

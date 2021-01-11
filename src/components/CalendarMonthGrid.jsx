@@ -105,6 +105,7 @@ const defaultProps = {
 
 function getMonths(initialMonth, numberOfMonths, withoutTransitionMonths) {
   let month = initialMonth;
+
   if (!withoutTransitionMonths) month = driver.subtract(month, { [parts.MONTHS]: 1 });
 
   const months = [];
@@ -310,6 +311,7 @@ class CalendarMonthGrid extends React.PureComponent {
           const hideForAnimation = i === 0 && !isVisible;
           const showForAnimation = i === 0 && isAnimating && isVisible;
           const monthString = toISOMonthString(month);
+
           return (
             <div
               key={monthString}
