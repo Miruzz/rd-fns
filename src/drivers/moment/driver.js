@@ -1,5 +1,7 @@
-import momentPropTypes from 'react-moment-proptypes';
+// TODO: handle moment legacy
+/* eslint-disable */
 
+import momentPropTypes from 'react-moment-proptypes';
 import moment from 'moment';
 import parts from '../parts';
 import formats from '../formats';

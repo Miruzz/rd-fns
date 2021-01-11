@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import moment from 'moment';
 import { expect } from 'chai';
 

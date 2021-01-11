@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import moment from 'moment/min/moment-with-locales';
 import { expect } from 'chai';
