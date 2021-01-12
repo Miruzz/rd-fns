@@ -1,10 +1,18 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import moment from 'moment';
 import { expect } from 'chai';
 
 import toISODateString from '../../src/utils/toISODateString';
-import { ISO_FORMAT } from '../../src/constants';
+
+import { ISO_FORMAT } from '../../src/drivers/moment/constants';
+import momentDriver from '../../src/drivers/moment/driver';
+import { setDriver } from '../../src/drivers/driver';
 
 describe('toISODateString', () => {
+  beforeEach(() => setDriver(momentDriver));
+
   it('returns null for falsy argument', () => {
     expect(toISODateString()).to.equal(null);
   });

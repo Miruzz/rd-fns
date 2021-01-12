@@ -91,7 +91,8 @@ class DayPickerKeyboardShortcuts extends React.PureComponent {
     this.onKeyDown = this.onKeyDown.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { phrases } = this.props;
     if (nextProps.phrases !== phrases) {
       this.keyboardShortcuts = getKeyboardShortcuts(nextProps.phrases);
@@ -100,6 +101,14 @@ class DayPickerKeyboardShortcuts extends React.PureComponent {
 
   componentDidUpdate() {
     this.handleFocus();
+  }
+
+  handleFocus() {
+    if (this.hideKeyboardShortcutsButton) {
+      // automatically move focus into the dialog by moving
+      // to the only interactive element, the hide button
+      this.hideKeyboardShortcutsButton.focus();
+    }
   }
 
   onKeyDown(e) {
@@ -150,14 +159,6 @@ class DayPickerKeyboardShortcuts extends React.PureComponent {
 
   setHideKeyboardShortcutsButtonRef(ref) {
     this.hideKeyboardShortcutsButton = ref;
-  }
-
-  handleFocus() {
-    if (this.hideKeyboardShortcutsButton) {
-      // automatically move focus into the dialog by moving
-      // to the only interactive element, the hide button
-      this.hideKeyboardShortcutsButton.focus();
-    }
   }
 
   render() {

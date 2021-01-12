@@ -1,10 +1,18 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import moment from 'moment';
 import { expect } from 'chai';
 
-import { ISO_FORMAT, ISO_MONTH_FORMAT } from '../../src/constants';
+import { ISO_FORMAT, ISO_MONTH_FORMAT } from '../../src/drivers/moment/constants';
 import toISOMonthString from '../../src/utils/toISOMonthString';
 
+import momentDriver from '../../src/drivers/moment/driver';
+import { setDriver } from '../../src/drivers/driver';
+
 describe('#toISOMonthString', () => {
+  beforeEach(() => setDriver(momentDriver));
+
   describe('arg is a moment object', () => {
     it('returns month in ISO_MONTH_FORMAT format', () => {
       const today = moment();

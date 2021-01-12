@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import moment from 'moment';
 import { expect } from 'chai';
@@ -14,6 +17,7 @@ import {
   HORIZONTAL_ORIENTATION,
   START_DATE,
 } from '../../src/constants';
+import { driver } from '../../src/drivers/driver';
 
 const describeIfWindow = typeof document === 'undefined' ? describe.skip : describe;
 
@@ -117,6 +121,13 @@ describe('DateRangePicker', () => {
           <DateRangePicker {...requiredProps} isDayBlocked={isDayBlocked} />
         )).dive();
         expect(wrapper.find(DateRangePickerInputController).prop('isDayBlocked')).to.equal(isDayBlocked);
+      });
+
+      it('is a noop when omitted', () => {
+        const wrapper = shallow((
+          <DateRangePicker {...requiredProps} />
+        )).dive();
+        expect(wrapper.find(DateRangePickerInputController).prop('isDayBlocked')).not.to.throw();
       });
     });
 
@@ -593,7 +604,6 @@ describe('DateRangePicker', () => {
       expect(onOutsideClick.callCount).to.equal(1);
     });
 
-
     it('tabbing within itself does not behave as an outside click', () => {
       const target = sinon.stub();
       const onOutsideClick = sinon.stub();
@@ -727,13 +737,13 @@ describe('DateRangePicker', () => {
         const dayPicker = wrapper.find(DayPickerRangeController);
         const dayPickerStartDateOffset = dayPicker.props().startDateOffset(startDate);
 
-        expect(dayPickerStartDateOffset.format()).to.equal(startDate.format());
+        expect(driver.format(dayPickerStartDateOffset)).to.equal(driver.format(startDate));
       });
     });
 
     describe('endDateOffset is passed in', () => {
       it('Should pass endDateOffset to DayPickerRangeController', () => {
-        const endDate = moment('2018-10-17', 'YYYY-MM-DD');
+        const endDate = moment('2018-10-17', 'yyyy-MM-dd');
         const onDatesChangeStub = sinon.stub();
         const wrapper = shallow((
           <DateRangePicker
@@ -780,5 +790,13 @@ describe('DateRangePicker', () => {
         expect(wrapper.find(DayPickerRangeController).props().maxDate).to.equal(maxDate);
       });
     });
+  });
+
+  it('should pass noBorder as noBorder to <DayPickerRangeController>', () => {
+    const wrapper = shallow((
+      <DateRangePicker {...requiredProps} focusedInput={START_DATE} noBorder />
+    )).dive();
+
+    expect(wrapper.find(DayPickerRangeController).prop('noBorder')).to.equal(true);
   });
 });

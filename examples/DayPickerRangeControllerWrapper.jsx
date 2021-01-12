@@ -1,9 +1,7 @@
 /* eslint-disable react/no-unused-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import momentPropTypes from 'react-moment-proptypes';
 import { forbidExtraProps } from 'airbnb-prop-types';
-import moment from 'moment';
 import omit from 'lodash/omit';
 
 import DayPickerRangeController from '../src/components/DayPickerRangeController';
@@ -11,18 +9,14 @@ import DayPickerRangeController from '../src/components/DayPickerRangeController
 import ScrollableOrientationShape from '../src/shapes/ScrollableOrientationShape';
 
 import { START_DATE, END_DATE, HORIZONTAL_ORIENTATION } from '../src/constants';
-import isInclusivelyAfterDay from '../src/utils/isInclusivelyAfterDay';
+import { driver } from '../src/drivers/driver';
 
 const propTypes = forbidExtraProps({
   // example props for the demo
   autoFocusEndDate: PropTypes.bool,
-  initialStartDate: momentPropTypes.momentObj,
-  initialEndDate: momentPropTypes.momentObj,
   startDateOffset: PropTypes.func,
   endDateOffset: PropTypes.func,
   showInputs: PropTypes.bool,
-  minDate: momentPropTypes.momentObj,
-  maxDate: momentPropTypes.momentObj,
 
   keepOpenOnDateSelect: PropTypes.bool,
   minimumNights: PropTypes.number,
@@ -77,7 +71,7 @@ const defaultProps = {
   renderDayContents: null,
   minimumNights: 1,
   isDayBlocked: () => false,
-  isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
+  // isOutsideRange: day => !isInclusivelyAfterDay(day, moment()),
   isDayHighlighted: () => false,
   enableOutsideDays: false,
   daysViolatingMinNightsCanBeClicked: false,
@@ -106,7 +100,7 @@ const defaultProps = {
   onNextMonthClick() {},
 
   // internationalization
-  monthFormat: 'MMMM YYYY',
+  monthFormat: 'MMMM yyyy',
 };
 
 class DayPickerRangeControllerWrapper extends React.Component {
@@ -164,8 +158,8 @@ class DayPickerRangeControllerWrapper extends React.Component {
       'showInputs',
     ]);
 
-    const startDateString = startDate && startDate.format('YYYY-MM-DD');
-    const endDateString = endDate && endDate.format('YYYY-MM-DD');
+    const startDateString = startDate && driver.format(startDate, 'yyyy-MM-dd');
+    const endDateString = endDate && endDate.format('yyyy-MM-dd');
     const renderCalendarInfo = errorMessage ? () => <div>{errorMessage}</div> : renderCalendarInfoProp;
 
     return (

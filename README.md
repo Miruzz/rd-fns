@@ -1,4 +1,6 @@
-# react-dates <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+# rd-fns <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
+
+## Getting Started
 
 [![Build Status][travis-svg]][travis-url]
 [![dependency status][deps-svg]][deps-url]
@@ -142,6 +144,8 @@ startDatePlaceholderText: PropTypes.string,
 endDatePlaceholderText: PropTypes.string,
 startDateAriaLabel: PropTypes.string,
 endDateAriaLabel: PropTypes.string,
+startDateTitleText: PropTypes.string,
+endDateTitleText: PropTypes.string,
 disabled: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([START_DATE, END_DATE])]),
 required: PropTypes.bool,
 readOnly: PropTypes.bool,
@@ -228,6 +232,7 @@ The following is a list of other *OPTIONAL* props you may provide to the `Single
 // input related props
 placeholder: PropTypes.string,
 ariaLabel: PropTypes.string,
+titleText: PropTypes.string,
 disabled: PropTypes.bool,
 required: PropTypes.bool,
 readOnly: PropTypes.bool,
@@ -412,4 +417,4 @@ The default interface that `react-dates` ships with is the [CSS interface](https
 [license-image]: http://img.shields.io/npm/l/react-dates.svg
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/react-dates.svg
-[downloads-url]: http://npm-stat.com/charts.html?package=react-dates
+[downloads-url]: http://npm-stat.com/charts.html?package=rd-fns

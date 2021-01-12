@@ -1,11 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
 
 import SingleDatePickerWrapper from '../examples/SingleDatePickerWrapper';
 
 import { VERTICAL_ORIENTATION, ANCHOR_RIGHT, OPEN_UP } from '../src/constants';
+import { addMonths } from 'date-fns';
 
 const TestPrevIcon = () => (
   <div
@@ -136,7 +136,7 @@ storiesOf('SDP - Calendar Props', module)
   )))
   .add('with month specified on open', withInfo()(() => (
     <SingleDatePickerWrapper
-      initialVisibleMonth={() => moment().add(10, 'months')}
+      initialVisibleMonth={() => addMonths(new Date(), 10)}
       autoFocus
     />
   )))

@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import moment from 'moment';
 import { expect } from 'chai';
 
@@ -10,7 +13,7 @@ const weeksWithOutsideDays = getCalendarMonthWeeks(today, true);
 
 describe('getCalendarMonthWeeks', () => {
   describe('input validation', () => {
-    it('throws a TypeError if first arg is not a valid moment object', () => {
+    it('throws a TypeError if first arg is not a valid driver date instance', () => {
       const invalidValues = [
         null,
         '2017-01-01T00:00:00Z',
@@ -19,7 +22,7 @@ describe('getCalendarMonthWeeks', () => {
       ];
       invalidValues.forEach((value) => {
         expect(() => getCalendarMonthWeeks(value))
-          .to.throw(TypeError, '`month` must be a valid moment object');
+          .to.throw(TypeError, '`month` must be a valid driver date instance');
       });
     });
 

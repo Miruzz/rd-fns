@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon-sandbox';
@@ -7,6 +10,7 @@ import raf from 'raf';
 
 import { BLOCKED_MODIFIER } from '../../src/constants';
 import CalendarDay, { PureCalendarDay } from '../../src/components/CalendarDay';
+import { driver } from '../../src/drivers/driver';
 
 describe('CalendarDay', () => {
   afterEach(() => {
@@ -17,25 +21,25 @@ describe('CalendarDay', () => {
     it('contains formatted day for single digit days', () => {
       const firstOfMonth = moment().startOf('month');
       const wrapper = shallow(<CalendarDay day={firstOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(firstOfMonth.format('D'));
+      expect(wrapper.text()).to.equal(firstOfMonth.format('d'));
     });
 
     it('contains formatted day for double digit days', () => {
       const lastOfMonth = moment().endOf('month');
       const wrapper = shallow(<CalendarDay day={lastOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(lastOfMonth.format('D'));
+      expect(wrapper.text()).to.equal(lastOfMonth.format('d'));
     });
 
     it('contains arbitrary content if renderDay is provided', () => {
       const dayName = moment().format('dddd');
-      const renderDay = (day) => day.format('dddd');
+      const renderDay = (day) => driver.format(day, 'dddd');
       const wrapper = shallow(<CalendarDay renderDayContents={renderDay} />).dive();
       expect(wrapper.text()).to.equal(dayName);
     });
 
     it('passes modifiers to renderDayContents', () => {
       const modifiers = new Set([BLOCKED_MODIFIER]);
-      const renderDayContents = (day, mods) => `${day.format('dddd')}${mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''}`;
+      const renderDayContents = (day, mods) => `${driver.format(day, 'dddd')}${mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''}`;
       const expected = `${moment().format('dddd')}BLOCKED`;
       const wrapper = shallow((
         <CalendarDay renderDayContents={renderDayContents} modifiers={modifiers} />
@@ -52,6 +56,32 @@ describe('CalendarDay', () => {
       const tabIndex = -1;
       const wrapper = shallow(<CalendarDay tabIndex={tabIndex} />).dive();
       expect(wrapper.props().tabIndex).to.equal(tabIndex);
+    });
+
+    describe('aria-current', () => {
+      it('should add aria-current to date for today date', () => {
+        const modifiers = new Set(['today']);
+
+        const wrapper = shallow((
+          <CalendarDay
+            modifiers={modifiers}
+          />
+        )).dive();
+
+        expect(wrapper.prop('aria-current')).to.equal('date');
+      });
+
+      it('should not add aria-current for not today date', () => {
+        const modifiers = new Set();
+
+        const wrapper = shallow((
+          <CalendarDay
+            modifiers={modifiers}
+          />
+        )).dive();
+
+        expect(wrapper).to.not.have.property('aria-current');
+      });
     });
 
     describe('aria-label', () => {

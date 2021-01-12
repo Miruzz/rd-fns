@@ -27,6 +27,17 @@ describe('DateInput', () => {
         expect(wrapper.find('input').props()['aria-label']).to.equal(placeholder);
       });
 
+      it('has props.titleText as a title attribute if titleText is passed in', () => {
+        const titleText = 'titleTextExample';
+        const wrapper = shallow(<DateInput id="date" titleText={titleText} />).dive();
+        expect(wrapper.find('input').props().title).to.equal(titleText);
+      });
+
+      it('has no title attribute if props.titleText is null', () => {
+        const wrapper = shallow(<DateInput id="date" titleText={null} />).dive();
+        expect(wrapper.find('input').props().title).to.equal(null);
+      });
+
       it('has value === props.displayValue', () => {
         const DISPLAY_VALUE = 'foobar';
         const wrapper = shallow(<DateInput id="date" displayValue={DISPLAY_VALUE} />).dive();
@@ -116,7 +127,8 @@ describe('DateInput', () => {
         const dateString = 'foo123';
         const wrapper = shallow(<DateInput id="date" />).dive();
         wrapper.setState({ dateString });
-        wrapper.instance().componentWillReceiveProps({ displayValue: '1991-07-13' });
+        wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ displayValue: '1991-07-13' });
         expect(wrapper.state()).to.have.property('dateString', '');
       });
     });
@@ -126,7 +138,8 @@ describe('DateInput', () => {
         const dateString = 'foo123';
         const wrapper = shallow(<DateInput id="date" />).dive();
         wrapper.setState({ dateString });
-        wrapper.instance().componentWillReceiveProps({ displayValue: null });
+        wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ displayValue: null });
         expect(wrapper.state()).to.have.property('dateString', dateString);
       });
     });

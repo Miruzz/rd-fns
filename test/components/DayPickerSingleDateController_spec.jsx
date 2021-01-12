@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
@@ -54,7 +57,8 @@ describe('DayPickerSingleDateController', () => {
             const addModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'addModifier');
             const date = today;
             const wrapper = shallow(<DayPickerSingleDateController {...props} date={date} />);
-            wrapper.instance().componentWillReceiveProps({ ...props, date });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, date });
             expect(getCallsByModifier(addModifierSpy, 'selected').length).to.equal(0);
           });
 
@@ -62,7 +66,8 @@ describe('DayPickerSingleDateController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'deleteModifier');
             const date = today;
             const wrapper = shallow(<DayPickerSingleDateController {...props} date={date} />);
-            wrapper.instance().componentWillReceiveProps({ ...props, date });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, date });
             expect(getCallsByModifier(deleteModifierSpy, 'selected').length).to.equal(0);
           });
         });
@@ -73,7 +78,8 @@ describe('DayPickerSingleDateController', () => {
             const date = today;
             const newDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerSingleDateController {...props} date={date} />);
-            wrapper.instance().componentWillReceiveProps({ ...props, date: newDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, date: newDate });
             const selectedCalls = getCallsByModifier(deleteModifierSpy, 'selected');
             expect(selectedCalls.length).to.equal(1);
             expect(selectedCalls[0].args[1]).to.equal(date);
@@ -84,7 +90,8 @@ describe('DayPickerSingleDateController', () => {
             const date = today;
             const newDate = moment().add(1, 'day');
             const wrapper = shallow(<DayPickerSingleDateController {...props} date={date} />);
-            wrapper.instance().componentWillReceiveProps({ ...props, date: newDate });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({ ...props, date: newDate });
             const selectedStartCalls = getCallsByModifier(addModifierSpy, 'selected');
             expect(selectedStartCalls.length).to.equal(1);
             expect(selectedStartCalls[0].args[1]).to.equal(newDate);
@@ -98,9 +105,10 @@ describe('DayPickerSingleDateController', () => {
             const isBlockedStub = sinon.stub(DayPickerSingleDateController.prototype, 'isBlocked');
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             isBlockedStub.resetHistory();
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+  });
             expect(isBlockedStub.callCount).to.equal(0);
           });
         });
@@ -124,10 +132,11 @@ describe('DayPickerSingleDateController', () => {
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
             isBlockedStub.resetHistory();
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+  });
             expect(isBlockedStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -136,10 +145,11 @@ describe('DayPickerSingleDateController', () => {
             sinon.stub(DayPickerSingleDateController.prototype, 'isBlocked').returns(true);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+  });
             const blockedOutOfRangeCalls = getCallsByModifier(addModifierSpy, 'blocked');
             expect(blockedOutOfRangeCalls.length).to.equal(numVisibleDays);
           });
@@ -149,10 +159,11 @@ describe('DayPickerSingleDateController', () => {
             sinon.stub(DayPickerSingleDateController.prototype, 'isBlocked').returns(false);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+  });
             const blockedOutOfRangeCalls = getCallsByModifier(deleteModifierSpy, 'blocked');
             expect(blockedOutOfRangeCalls.length).to.equal(numVisibleDays);
           });
@@ -170,20 +181,22 @@ describe('DayPickerSingleDateController', () => {
               />
             ));
             const prevCallCount = isOutsideRangeStub.callCount;
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isOutsideRange if changed', () => {
             const isOutsideRangeStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.not.equal(0);
           });
         });
@@ -206,11 +219,12 @@ describe('DayPickerSingleDateController', () => {
             const isOutsideRangeStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isOutsideRange: isOutsideRangeStub,
+  });
             expect(isOutsideRangeStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -222,11 +236,12 @@ describe('DayPickerSingleDateController', () => {
             const isOutsideRangeStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isOutsideRange: isOutsideRangeStub,
+  });
             const blockedOutOfRangeCalls = getCallsByModifier(
               addModifierSpy,
               'blocked-out-of-range',
@@ -242,11 +257,12 @@ describe('DayPickerSingleDateController', () => {
             const isOutsideRangeStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isOutsideRange: isOutsideRangeStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isOutsideRange: isOutsideRangeStub,
+  });
             const blockedOutOfRangeCalls = getCallsByModifier(
               deleteModifierSpy,
               'blocked-out-of-range',
@@ -265,20 +281,22 @@ describe('DayPickerSingleDateController', () => {
               isDayBlocked={isDayBlockedStub}
             />);
             const prevCallCount = isDayBlockedStub.callCount;
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isDayBlocked if changed', () => {
             const isDayBlockedStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.not.equal(0);
           });
         });
@@ -301,11 +319,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayBlockedStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayBlocked: isDayBlockedStub,
+  });
             expect(isDayBlockedStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -314,11 +333,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayBlockedStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayBlocked: isDayBlockedStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(addModifierSpy, 'blocked-calendar');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -328,11 +348,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayBlockedStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayBlocked: isDayBlockedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayBlocked: isDayBlockedStub,
+  });
             const blockedCalendarCalls = getCallsByModifier(deleteModifierSpy, 'blocked-calendar');
             expect(blockedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -348,20 +369,22 @@ describe('DayPickerSingleDateController', () => {
               isDayHighlighted={isDayHighlightedStub}
             />);
             const prevCallCount = isDayHighlightedStub.callCount;
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.equal(prevCallCount);
           });
 
           it('calls isDayHighlighted if changed', () => {
             const isDayHighlightedStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.not.equal(0);
           });
         });
@@ -384,11 +407,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayHighlightedStub = sinon.stub();
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             expect(isDayHighlightedStub.callCount).to.equal(numVisibleDays);
           });
 
@@ -397,11 +421,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayHighlightedStub = sinon.stub().returns(true);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             const highlightedCalendarCalls = getCallsByModifier(addModifierSpy, 'highlighted-calendar');
             expect(highlightedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -411,11 +436,12 @@ describe('DayPickerSingleDateController', () => {
             const isDayHighlightedStub = sinon.stub().returns(false);
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.setState({ visibleDays });
-            wrapper.instance().componentWillReceiveProps({
-              ...props,
-              focused: true,
-              isDayHighlighted: isDayHighlightedStub,
-            });
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    ...props,
+    focused: true,
+    isDayHighlighted: isDayHighlightedStub,
+  });
             const highlightedCalendarCalls = getCallsByModifier(deleteModifierSpy, 'highlighted-calendar');
             expect(highlightedCalendarCalls.length).to.equal(numVisibleDays);
           });
@@ -428,7 +454,8 @@ describe('DayPickerSingleDateController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'deleteModifier');
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.instance().today = today;
-            wrapper.instance().componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(deleteModifierSpy, 'today');
             expect(todayCalls.length).to.equal(0);
           });
@@ -437,7 +464,8 @@ describe('DayPickerSingleDateController', () => {
             const addModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.instance().today = today;
-            wrapper.instance().componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(addModifierSpy, 'today');
             expect(todayCalls.length).to.equal(0);
           });
@@ -448,7 +476,8 @@ describe('DayPickerSingleDateController', () => {
             const deleteModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'deleteModifier');
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.instance().today = moment().subtract(1, 'day');
-            wrapper.instance().componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(deleteModifierSpy, 'today');
             expect(todayCalls.length).to.equal(1);
           });
@@ -457,7 +486,8 @@ describe('DayPickerSingleDateController', () => {
             const addModifierSpy = sinon.spy(DayPickerSingleDateController.prototype, 'addModifier');
             const wrapper = shallow(<DayPickerSingleDateController {...props} />);
             wrapper.instance().today = moment().subtract(1, 'day');
-            wrapper.instance().componentWillReceiveProps(props);
+            wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps(props);
             const todayCalls = getCallsByModifier(addModifierSpy, 'today');
             expect(todayCalls.length).to.equal(1);
           });

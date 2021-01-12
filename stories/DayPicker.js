@@ -8,6 +8,7 @@ import {
   VERTICAL_ORIENTATION,
   VERTICAL_SCROLLABLE,
 } from '../src/constants';
+import { driver } from '../src/drivers/driver';
 
 const TestPrevIcon = () => (
   <div
@@ -107,7 +108,10 @@ function renderNavNextButton(buttonProps) {
 
 storiesOf('DayPicker', module)
   .add('default', withInfo()(() => (
-    <DayPicker />
+    <DayPicker firstDayOfWeek={1} />
+  )))
+  .add('monday is first day of the week', withInfo()(() => (
+    <DayPicker firstDayOfWeek={1} />
   )))
   .add('with custom day size', withInfo()(() => (
     <DayPicker daySize={50} />
@@ -189,7 +193,7 @@ storiesOf('DayPicker', module)
   )))
   .add('with custom details', withInfo()(() => (
     <DayPicker
-      renderDayContents={(day) => (day.day() % 6 === 5 ? '😻' : day.format('D'))}
+      renderDayContents={(day) => (day.day() % 6 === 5 ? '😻' : driver.format(day, 'd'))}
     />
   )))
   .add('vertical with fixed-width container', withInfo()(() => (

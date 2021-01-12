@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import moment from 'moment/min/moment-with-locales';
 import { expect } from 'chai';
@@ -17,7 +20,6 @@ import {
   VERTICAL_SCROLLABLE,
   NAV_POSITION_BOTTOM,
 } from '../../src/constants';
-
 
 const today = moment().locale('en');
 const event = { preventDefault() {}, stopPropagation() {} };
@@ -514,7 +516,6 @@ describe('DayPicker', () => {
       });
     });
 
-
     describe('focusedDate is falsy', () => {
       it('does not call maybeTransitionPrevMonth', () => {
         const maybeTransitionPrevMonthSpy = sinon.spy(PureDayPicker.prototype, 'maybeTransitionPrevMonth');
@@ -605,6 +606,21 @@ describe('DayPicker', () => {
       const wrapper = shallow(<DayPicker />).dive();
       wrapper.instance().onPrevMonthTransition(test);
       expect(wrapper.state().nextFocusedDate).to.equal(test);
+    });
+  });
+
+  describe('monthTitleHeight', () => {
+    it('change monthTitleHeight correctly with setMonthTitleHeight', () => {
+      const wrapper = shallow(<DayPicker />).dive();
+      wrapper.instance().setMonthTitleHeight(80);
+      expect(wrapper.state().monthTitleHeight).to.equal(80);
+    });
+
+    it('do not change monthTitleHeight with renderMonthText === prevRenderMonthText', () => {
+      const wrapper = shallow(<DayPicker renderMonthText={() => 'foo'} />).dive();
+      wrapper.instance().setMonthTitleHeight(80);
+      wrapper.setProps({ renderMonthText: () => 'foo' });
+      expect(wrapper.state().monthTitleHeight).to.equal(80);
     });
   });
 

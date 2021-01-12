@@ -1,7 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
+import { addMonths } from 'date-fns';
 
 import { VERTICAL_ORIENTATION, ANCHOR_RIGHT, OPEN_UP, NAV_POSITION_BOTTOM } from '../src/constants';
 
@@ -160,7 +160,7 @@ storiesOf('DRP - Calendar Props', module)
   )))
   .add('with month specified on open', withInfo()(() => (
     <DateRangePickerWrapper
-      initialVisibleMonth={() => moment().add(10, 'months')}
+      initialVisibleMonth={() => addMonths(new Date(), 10)}
       autoFocus
     />
   )))
@@ -251,6 +251,13 @@ storiesOf('DRP - Calendar Props', module)
   .add('with custom vertical spacing', withInfo()(() => (
     <DateRangePickerWrapper
       verticalSpacing={0}
+      autoFocus
+    />
+  )))
+  .add('without borders', withInfo()(() => (
+    <DateRangePickerWrapper
+      verticalSpacing={0}
+      noBorder
       autoFocus
     />
   )));

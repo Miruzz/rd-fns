@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import { expect } from 'chai';
 import moment from 'moment';
@@ -128,7 +131,7 @@ describe('DateRangePickerInputController', () => {
 
   describe('#onEndDateChange', () => {
     describe('is a valid end date', () => {
-      const validFutureDateString = moment(today).add(10, 'days').format('YYYY-MM-DD');
+      const validFutureDateString = moment(today).add(10, 'days').format('yyyy-MM-dd');
       describe('when props.startDate is not provided', () => {
         it('calls props.onDatesChange with provided end date', () => {
           const onDatesChangeStub = sinon.stub();
@@ -508,7 +511,7 @@ describe('DateRangePickerInputController', () => {
 
   describe('#onStartDateChange', () => {
     describe('is a valid start date', () => {
-      const validFutureDateString = moment(today).add(5, 'days').format('YYYY-MM-DD');
+      const validFutureDateString = moment(today).add(5, 'days').format('yyyy-MM-dd');
       describe('is before props.endDate', () => {
         const endDate = moment(today).add(10, 'days');
         it('calls props.onDatesChange provided start date and props.endDate', () => {
@@ -751,7 +754,7 @@ describe('DateRangePickerInputController', () => {
     });
 
     describe('is outside range', () => {
-      const futureDate = moment().add(7, 'days').format('DD/MM/YYYY');
+      const futureDate = moment().add(7, 'days').format('YYYY/MM/DD');
       const isOutsideRange = (day) => day > moment().add(5, 'days');
 
       it('calls props.onDatesChange', () => {

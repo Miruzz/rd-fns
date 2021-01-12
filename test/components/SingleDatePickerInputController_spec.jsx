@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
@@ -42,7 +45,7 @@ describe('SingleDatePickerInputController', () => {
 
   describe('#onChange', () => {
     describe('valid future date string', () => {
-      const futureDateString = moment().add(10, 'days').format('YYYY-MM-DD');
+      const futureDateString = moment().add(10, 'days').format('yyyy-MM-dd');
       it('calls props.onDateChange once', () => {
         const onDateChangeStub = sinon.stub();
         const wrapper = shallow((

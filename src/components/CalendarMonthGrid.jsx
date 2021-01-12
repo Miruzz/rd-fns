@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import momentPropTypes from 'react-moment-proptypes';
 import { forbidExtraProps, mutuallyExclusiveProps, nonNegativeInteger } from 'airbnb-prop-types';
 import { css, withStyles, withStylesPropTypes } from 'react-with-styles';
-import moment from 'moment';
 import { addEventListener } from 'consolidated-events';
+
+import { driver, chain } from '../drivers/driver';
+import formats from '../drivers/formats';
+import parts from '../drivers/parts';
 
 import { CalendarDayPhrases } from '../defaultPhrases';
 import getPhrasePropTypes from '../utils/getPhrasePropTypes';
@@ -23,7 +25,6 @@ import ModifiersShape from '../shapes/ModifiersShape';
 import ScrollableOrientationShape from '../shapes/ScrollableOrientationShape';
 import DayOfWeekShape from '../shapes/DayOfWeekShape';
 
-
 import {
   HORIZONTAL_ORIENTATION,
   VERTICAL_ORIENTATION,
@@ -36,7 +37,7 @@ const propTypes = forbidExtraProps({
   enableOutsideDays: PropTypes.bool,
   firstVisibleMonthIndex: PropTypes.number,
   horizontalMonthPadding: nonNegativeInteger,
-  initialMonth: momentPropTypes.momentObj,
+  initialMonth: driver.datePropType,
   isAnimating: PropTypes.bool,
   numberOfMonths: PropTypes.number,
   modifiers: PropTypes.objectOf(PropTypes.objectOf(ModifiersShape)),
@@ -53,7 +54,7 @@ const propTypes = forbidExtraProps({
   translationValue: PropTypes.number,
   renderMonthElement: mutuallyExclusiveProps(PropTypes.func, 'renderMonthText', 'renderMonthElement'),
   daySize: nonNegativeInteger,
-  focusedDate: momentPropTypes.momentObj, // indicates focusable day
+  focusedDate: driver.datePropType, // indicates focusable day
   isFocused: PropTypes.bool, // indicates whether or not to move focus to focusable day
   firstDayOfWeek: DayOfWeekShape,
   setMonthTitleHeight: PropTypes.func,
@@ -71,7 +72,7 @@ const defaultProps = {
   enableOutsideDays: false,
   firstVisibleMonthIndex: 0,
   horizontalMonthPadding: 13,
-  initialMonth: moment(),
+  initialMonth: driver.now(),
   isAnimating: false,
   numberOfMonths: 1,
   modifiers: {},
@@ -97,19 +98,20 @@ const defaultProps = {
   verticalBorderSpacing: undefined,
 
   // i18n
-  monthFormat: 'MMMM YYYY', // english locale
+  monthFormat: driver.formatString(formats.MONTH),
   phrases: CalendarDayPhrases,
   dayAriaLabelFormat: undefined,
 };
 
 function getMonths(initialMonth, numberOfMonths, withoutTransitionMonths) {
-  let month = initialMonth.clone();
-  if (!withoutTransitionMonths) month = month.subtract(1, 'month');
+  let month = initialMonth;
+
+  if (!withoutTransitionMonths) month = driver.subtract(month, { [parts.MONTHS]: 1 });
 
   const months = [];
   for (let i = 0; i < (withoutTransitionMonths ? numberOfMonths : numberOfMonths + 2); i += 1) {
     months.push(month);
-    month = month.clone().add(1, 'month');
+    month = driver.add(month, { [parts.MONTHS]: 1 });
   }
 
   return months;
@@ -127,7 +129,6 @@ class CalendarMonthGrid extends React.PureComponent {
     this.onTransitionEnd = this.onTransitionEnd.bind(this);
     this.setContainerRef = this.setContainerRef.bind(this);
 
-    this.locale = moment.locale();
     this.onMonthSelect = this.onMonthSelect.bind(this);
     this.onYearSelect = this.onYearSelect.bind(this);
   }
@@ -140,7 +141,8 @@ class CalendarMonthGrid extends React.PureComponent {
     );
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { initialMonth, numberOfMonths, orientation } = nextProps;
     const { months } = this.state;
 
@@ -148,17 +150,18 @@ class CalendarMonthGrid extends React.PureComponent {
       initialMonth: prevInitialMonth,
       numberOfMonths: prevNumberOfMonths,
     } = this.props;
-    const hasMonthChanged = !prevInitialMonth.isSame(initialMonth, 'month');
+    const hasMonthChanged = driver.get(prevInitialMonth, parts.MONTHS) !== driver
+      .get(initialMonth, parts.MONTHS);
     const hasNumberOfMonthsChanged = prevNumberOfMonths !== numberOfMonths;
     let newMonths = months;
 
     if (hasMonthChanged && !hasNumberOfMonthsChanged) {
       if (isNextMonth(prevInitialMonth, initialMonth)) {
         newMonths = months.slice(1);
-        newMonths.push(months[months.length - 1].clone().add(1, 'month'));
+        newMonths.push(driver.add(months[months.length - 1], { [parts.MONTHS]: 1 }));
       } else if (isPrevMonth(prevInitialMonth, initialMonth)) {
         newMonths = months.slice(0, months.length - 1);
-        newMonths.unshift(months[0].clone().subtract(1, 'month'));
+        newMonths.unshift(driver.subtract(months[0], { [parts.MONTHS]: 1 }));
       } else {
         const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
         newMonths = getMonths(initialMonth, numberOfMonths, withoutTransitionMonths);
@@ -168,12 +171,6 @@ class CalendarMonthGrid extends React.PureComponent {
     if (hasNumberOfMonthsChanged) {
       const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
       newMonths = getMonths(initialMonth, numberOfMonths, withoutTransitionMonths);
-    }
-
-    const momentLocale = moment.locale();
-    if (this.locale !== momentLocale) {
-      this.locale = momentLocale;
-      newMonths = newMonths.map((m) => m.locale(this.locale));
     }
 
     this.setState({
@@ -206,7 +203,7 @@ class CalendarMonthGrid extends React.PureComponent {
   }
 
   onMonthSelect(currentMonth, newMonthVal) {
-    const newMonth = currentMonth.clone();
+    let newMonth = currentMonth;
     const { onMonthChange, orientation } = this.props;
     const { months } = this.state;
     const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
@@ -214,12 +211,15 @@ class CalendarMonthGrid extends React.PureComponent {
     if (!withoutTransitionMonths) {
       initialMonthSubtraction -= 1;
     }
-    newMonth.set('month', newMonthVal).subtract(initialMonthSubtraction, 'months');
+    newMonth = chain(newMonth)
+      .set({ [parts.MONTHS]: newMonthVal })
+      .subtract({ [parts.MONTHS]: initialMonthSubtraction })
+      .value();
     onMonthChange(newMonth);
   }
 
   onYearSelect(currentMonth, newYearVal) {
-    const newMonth = currentMonth.clone();
+    let newMonth = currentMonth;
     const { onYearChange, orientation } = this.props;
     const { months } = this.state;
     const withoutTransitionMonths = orientation === VERTICAL_SCROLLABLE;
@@ -227,7 +227,10 @@ class CalendarMonthGrid extends React.PureComponent {
     if (!withoutTransitionMonths) {
       initialMonthSubtraction -= 1;
     }
-    newMonth.set('year', newYearVal).subtract(initialMonthSubtraction, 'months');
+    newMonth = chain(newMonth)
+      .set({ [parts.YEARS]: newYearVal })
+      .subtract({ [parts.MONTHS]: initialMonthSubtraction })
+      .value();
     onYearChange(newMonth);
   }
 
@@ -293,7 +296,7 @@ class CalendarMonthGrid extends React.PureComponent {
           isVerticalScrollable && styles.CalendarMonthGrid__vertical_scrollable,
           isAnimating && styles.CalendarMonthGrid__animating,
           isAnimating && transitionDuration && {
-            transition: `transform ${transitionDuration}ms ease-in-out`,
+            transition: `transform ${transitionDuration}ms ease-in-out 0.1s`,
           },
           {
             ...getTransformStyles(transformValue),
@@ -309,6 +312,7 @@ class CalendarMonthGrid extends React.PureComponent {
           const hideForAnimation = i === 0 && !isVisible;
           const showForAnimation = i === 0 && isAnimating && isVisible;
           const monthString = toISOMonthString(month);
+
           return (
             <div
               key={monthString}

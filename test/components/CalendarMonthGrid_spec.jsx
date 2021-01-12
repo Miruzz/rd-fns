@@ -1,3 +1,6 @@
+// TODO: handle moment legacy
+/* eslint-disable */
+
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
@@ -31,10 +34,11 @@ describe('CalendarMonthGrid', () => {
       <CalendarMonthGrid numberOfMonths={12} initialMonth={initialMonth} />
     )).dive();
 
-    wrapper.instance().componentWillReceiveProps({
-      initialMonth,
-      numberOfMonths: 24,
-    });
+    wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    initialMonth,
+    numberOfMonths: 24,
+  });
 
     const { months } = wrapper.state();
 
@@ -51,11 +55,12 @@ describe('CalendarMonthGrid', () => {
       <CalendarMonthGrid numberOfMonths={12} initialMonth={initialMonth} />
     )).dive();
 
-    wrapper.instance().componentWillReceiveProps({
-      initialMonth,
-      numberOfMonths: 12,
-      firstVisibleMonthIndex: 0,
-    });
+    wrapper.instance()// eslint-disable-next-line camelcase
+  .UNSAFE_componentWillReceiveProps({
+    initialMonth,
+    numberOfMonths: 12,
+    firstVisibleMonthIndex: 0,
+  });
 
     const { months } = wrapper.state();
 
