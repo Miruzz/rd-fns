@@ -1,14 +1,5 @@
 # rd-fns <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-# Important information
-Hi. The following repo is a hard fork of react-dates by airbnb. The major part of driver was taken from [tonyhb's repo](https://github.com/tonyhb/react-dates).
-
-Under the hood this react-dates implementation use [date-fns](https://date-fns.org/) as date formatter. The main reason for creating this fork was deprecation of momentjs.
-
-Following benefits:
-- interfaces of the library 100% compatible with original one
-- instead of moment object the library accept any valid date object/timestamp/parsable string
-
 ## Getting Started
 
 [![Build Status][travis-svg]][travis-url]
