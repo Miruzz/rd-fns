@@ -3,9 +3,12 @@
 <!--
 - []  ([#](https://github.com/airbnb/react-dates/pull/))
 -->
+## 22.0.2f
 
+[doc] Update docs ([#3](https://github.com/Miruzz/rd-fns/pull/3))
 ## 22.0.1f
-[doc] Update docs ([#12](https://github.com/Miruzz/rd-fns/pull/2))
+
+[doc] Update docs ([#2](https://github.com/Miruzz/rd-fns/pull/2))
 ## 22.0.0f
 
 - [new] switch to date-fns via driver ([#1](https://github.com/Miruzz/rd-fns/pull/1))
