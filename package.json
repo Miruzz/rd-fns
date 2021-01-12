@@ -1,6 +1,6 @@
 {
   "name": "rd-fns",
-  "version": "22.0.3f",
+  "version": "22.0.3",
   "description": "A responsive and accessible date range picker component built with React",
   "main": "index.js",
   "scripts": {
