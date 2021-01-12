@@ -3,9 +3,14 @@
 <!--
 - []  ([#](https://github.com/airbnb/react-dates/pull/))
 -->
+## 22.0.3f
+
+[fix] Disable eslint in examples for MVP purpose ([#4](https://github.com/Miruzz/rd-fns/pull/4))
+
 ## 22.0.2f
 
 [doc] Update docs ([#3](https://github.com/Miruzz/rd-fns/pull/3))
+
 ## 22.0.1f
 
 [doc] Update docs ([#2](https://github.com/Miruzz/rd-fns/pull/2))
