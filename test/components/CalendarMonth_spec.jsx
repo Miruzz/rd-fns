@@ -1,12 +1,8 @@
-// TODO: handle moment legacy
-/* eslint-disable */
-
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon-sandbox';
-import moment from 'moment';
-
+import { format, subMonths } from 'date-fns';
 import CalendarMonth from '../../src/components/CalendarMonth';
 
 describe('CalendarMonth', () => {
@@ -25,25 +21,29 @@ describe('CalendarMonth', () => {
 
     describe('caption', () => {
       it('text is the correctly formatted month title', () => {
-        const MONTH = moment();
-        const captionWrapper = shallow(<CalendarMonth month={MONTH} />).dive().find('strong');
-        expect(captionWrapper.text()).to.equal(MONTH.format('MMMM YYYY'));
+        const MONTH = new Date();
+        const captionWrapper = shallow(<CalendarMonth month={MONTH} />)
+          .dive()
+          .find('strong');
+        expect(captionWrapper.text()).to.equal(format(new Date(), 'MMMM yyyy'));
       });
     });
 
     it('renderMonthElement renders month element when month changes', () => {
-      const renderMonthElementStub = sinon.stub().returns(<div id="month-element" />);
-      const wrapper = shallow(<CalendarMonth renderMonthElement={renderMonthElementStub} />).dive();
-      wrapper.setProps({ month: moment().subtract(1, 'months') });
+      const renderMonthElementStub = sinon
+        .stub()
+        .returns(<div id="month-element" />);
+      const wrapper = shallow(
+        <CalendarMonth renderMonthElement={renderMonthElementStub} />,
+      ).dive();
+      wrapper.setProps({ month: subMonths(new Date(), 1) });
 
-      const [{
-        month,
-        onMonthSelect,
-        onYearSelect,
-        isVisible,
-      }] = renderMonthElementStub.getCall(0).args;
+      const [
+        {
+          onMonthSelect, onYearSelect, isVisible,
+        },
+      ] = renderMonthElementStub.getCall(0).args;
 
-      expect(moment.isMoment(month)).to.equal(true);
       expect(typeof onMonthSelect).to.equal('function');
       expect(typeof onYearSelect).to.equal('function');
       expect(typeof isVisible).to.equal('boolean');

@@ -1,13 +1,11 @@
-// TODO: handle moment legacy
-/* eslint-disable */
-
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon-sandbox';
 import { shallow } from 'enzyme';
-import moment from 'moment';
 import raf from 'raf';
-
+import {
+  startOfMonth, getDate, endOfMonth, format,
+} from 'date-fns';
 import { BLOCKED_MODIFIER } from '../../src/constants';
 import CalendarDay, { PureCalendarDay } from '../../src/components/CalendarDay';
 import { driver } from '../../src/drivers/driver';
@@ -19,31 +17,38 @@ describe('CalendarDay', () => {
 
   describe('#render', () => {
     it('contains formatted day for single digit days', () => {
-      const firstOfMonth = moment().startOf('month');
+      const firstOfMonth = startOfMonth(new Date());
       const wrapper = shallow(<CalendarDay day={firstOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(firstOfMonth.format('d'));
+      expect(wrapper.text()).to.equal(`${getDate(firstOfMonth)}`);
     });
 
     it('contains formatted day for double digit days', () => {
-      const lastOfMonth = moment().endOf('month');
+      const lastOfMonth = endOfMonth(new Date());
       const wrapper = shallow(<CalendarDay day={lastOfMonth} />).dive();
-      expect(wrapper.text()).to.equal(lastOfMonth.format('d'));
+      expect(wrapper.text()).to.equal(`${getDate(lastOfMonth)}`);
     });
 
     it('contains arbitrary content if renderDay is provided', () => {
-      const dayName = moment().format('dddd');
       const renderDay = (day) => driver.format(day, 'dddd');
-      const wrapper = shallow(<CalendarDay renderDayContents={renderDay} />).dive();
-      expect(wrapper.text()).to.equal(dayName);
+      const wrapper = shallow(
+        <CalendarDay renderDayContents={renderDay} />,
+      ).dive();
+      expect(wrapper.text()).to.equal(format(new Date(), 'dddd'));
     });
 
     it('passes modifiers to renderDayContents', () => {
       const modifiers = new Set([BLOCKED_MODIFIER]);
-      const renderDayContents = (day, mods) => `${driver.format(day, 'dddd')}${mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''}`;
-      const expected = `${moment().format('dddd')}BLOCKED`;
-      const wrapper = shallow((
-        <CalendarDay renderDayContents={renderDayContents} modifiers={modifiers} />
-      )).dive();
+      const renderDayContents = (day, mods) => `${driver.format(day, 'dddd')}${
+        mods.has(BLOCKED_MODIFIER) ? 'BLOCKED' : ''
+      }`;
+      const expected = `${format(new Date(), 'dddd')}BLOCKED`;
+      const wrapper = shallow(
+        <CalendarDay
+          renderDayContents={renderDayContents}
+          modifiers={modifiers}
+        />,
+      ).dive();
+
       expect(wrapper.text()).to.equal(expected);
     });
 
@@ -62,11 +67,7 @@ describe('CalendarDay', () => {
       it('should add aria-current to date for today date', () => {
         const modifiers = new Set(['today']);
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-          />
-        )).dive();
+        const wrapper = shallow(<CalendarDay modifiers={modifiers} />).dive();
 
         expect(wrapper.prop('aria-current')).to.equal('date');
       });
@@ -74,11 +75,7 @@ describe('CalendarDay', () => {
       it('should not add aria-current for not today date', () => {
         const modifiers = new Set();
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-          />
-        )).dive();
+        const wrapper = shallow(<CalendarDay modifiers={modifiers} />).dive();
 
         expect(wrapper).to.not.have.property('aria-current');
       });
@@ -86,40 +83,39 @@ describe('CalendarDay', () => {
 
     describe('aria-label', () => {
       const phrases = {};
-      const day = moment('10/10/2017', 'MM/DD/YYYY');
+      const day = new Date('10/10/2017');
 
       beforeEach(() => {
-        phrases.chooseAvailableDate = sinon.stub().returns('chooseAvailableDate text');
+        phrases.chooseAvailableDate = sinon
+          .stub()
+          .returns('chooseAvailableDate text');
         phrases.dateIsSelected = sinon.stub().returns('dateIsSelected text');
-        phrases.dateIsUnavailable = sinon.stub().returns('dateIsUnavailable text');
-        phrases.dateIsSelectedAsStartDate = sinon.stub().returns('dateIsSelectedAsStartDate text');
-        phrases.dateIsSelectedAsEndDate = sinon.stub().returns('dateIsSelectedAsEndDate text');
+        phrases.dateIsUnavailable = sinon
+          .stub()
+          .returns('dateIsUnavailable text');
+        phrases.dateIsSelectedAsStartDate = sinon
+          .stub()
+          .returns('dateIsSelectedAsStartDate text');
+        phrases.dateIsSelectedAsEndDate = sinon
+          .stub()
+          .returns('dateIsSelectedAsEndDate text');
       });
 
       it('is formatted with the chooseAvailableDate phrase function when day is available', () => {
         const modifiers = new Set();
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
-
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
         expect(wrapper.prop('aria-label')).to.equal('chooseAvailableDate text');
       });
 
       it('is formatted with the dateIsSelected phrase function when day is selected', () => {
         const modifiers = new Set(['selected']);
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
 
         expect(wrapper.prop('aria-label')).to.equal('dateIsSelected text');
       });
@@ -127,13 +123,9 @@ describe('CalendarDay', () => {
       it('is formatted with the dateIsSelected phrase function when day is selected in a span', () => {
         const modifiers = new Set(['selected-span']);
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
 
         expect(wrapper.prop('aria-label')).to.equal('dateIsSelected text');
       });
@@ -141,41 +133,33 @@ describe('CalendarDay', () => {
       it('is formatted with the dateIsSelectedAsStartDate phrase function when day is selected as the start date', () => {
         const modifiers = new Set().add(BLOCKED_MODIFIER).add('selected-start');
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
 
-        expect(wrapper.prop('aria-label')).to.equal('dateIsSelectedAsStartDate text');
+        expect(wrapper.prop('aria-label')).to.equal(
+          'dateIsSelectedAsStartDate text',
+        );
       });
 
       it('is formatted with the dateIsSelectedAsEndDate phrase function when day is selected as the end date', () => {
         const modifiers = new Set().add(BLOCKED_MODIFIER).add('selected-end');
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
 
-        expect(wrapper.prop('aria-label')).to.equal('dateIsSelectedAsEndDate text');
+        expect(wrapper.prop('aria-label')).to.equal(
+          'dateIsSelectedAsEndDate text',
+        );
       });
 
       it('is formatted with the dateIsUnavailable phrase function when day is not available', () => {
         const modifiers = new Set([BLOCKED_MODIFIER]);
 
-        const wrapper = shallow((
-          <CalendarDay
-            modifiers={modifiers}
-            phrases={phrases}
-            day={day}
-          />
-        )).dive();
+        const wrapper = shallow(
+          <CalendarDay modifiers={modifiers} phrases={phrases} day={day} />,
+        ).dive();
 
         expect(wrapper.prop('aria-label')).to.equal('dateIsUnavailable text');
       });
@@ -183,29 +167,25 @@ describe('CalendarDay', () => {
       it('should set aria-label with a value pass through ariaLabelFormat prop if it exists', () => {
         const modifiers = new Set();
 
-        const wrapper = shallow((
+        const wrapper = shallow(
           <CalendarDay
             modifiers={modifiers}
             day={day}
-            ariaLabelFormat="MMMM Do YYYY"
-          />
-        )).dive();
-
+            ariaLabelFormat="MMMM do yyyy"
+          />,
+        ).dive();
         expect(wrapper.prop('aria-label')).to.equal('October 10th 2017');
       });
     });
 
     describe('event handlers', () => {
-      const day = moment('10/10/2017', 'MM/DD/YYYY');
+      const day = format(new Date('10/10/2017'), 'MM/do/yyyy');
 
       let wrapper;
       beforeEach(() => {
-        wrapper = shallow((
-          <CalendarDay
-            day={day}
-            ariaLabelFormat="MMMM Do YYYY"
-          />
-        )).dive();
+        wrapper = shallow(
+          <CalendarDay day={day} ariaLabelFormat="MMMM do yyyy" />,
+        ).dive();
       });
 
       it('onMouseUp blurs the event target', () => {
@@ -234,18 +214,15 @@ describe('CalendarDay', () => {
   });
 
   describe('#onKeyDown', () => {
-    const day = moment('10/10/2017', 'MM/DD/YYYY');
+    const day = format(new Date('10/10/2017'), 'MM/do/yyyy');
 
     let onDayClick;
     let wrapper;
     beforeEach(() => {
       onDayClick = sinon.spy();
-      wrapper = shallow((
-        <CalendarDay
-          day={day}
-          onDayClick={onDayClick}
-        />
-      )).dive();
+      wrapper = shallow(
+        <CalendarDay day={day} onDayClick={onDayClick} />,
+      ).dive();
     });
 
     it('calls onDayClick with the enter key', () => {
@@ -300,7 +277,9 @@ describe('CalendarDay', () => {
 
     it('calls props.onDayClick', () => {
       const onDayClickStub = sinon.stub();
-      const wrapper = shallow(<CalendarDay onDayClick={onDayClickStub} />).dive();
+      const wrapper = shallow(
+        <CalendarDay onDayClick={onDayClickStub} />,
+      ).dive();
       wrapper.instance().onDayClick();
       expect(onDayClickStub).to.have.property('callCount', 1);
     });
@@ -309,7 +288,10 @@ describe('CalendarDay', () => {
   describe('#onDayMouseEnter', () => {
     let onDayMouseEnterSpy;
     beforeEach(() => {
-      onDayMouseEnterSpy = sinon.spy(PureCalendarDay.prototype, 'onDayMouseEnter');
+      onDayMouseEnterSpy = sinon.spy(
+        PureCalendarDay.prototype,
+        'onDayMouseEnter',
+      );
     });
 
     it('gets triggered by mouseenter', () => {
@@ -320,7 +302,9 @@ describe('CalendarDay', () => {
 
     it('calls props.onDayMouseEnter', () => {
       const onMouseEnterStub = sinon.stub();
-      const wrapper = shallow(<CalendarDay onDayMouseEnter={onMouseEnterStub} />).dive();
+      const wrapper = shallow(
+        <CalendarDay onDayMouseEnter={onMouseEnterStub} />,
+      ).dive();
       wrapper.instance().onDayMouseEnter();
       expect(onMouseEnterStub).to.have.property('callCount', 1);
     });
@@ -329,7 +313,10 @@ describe('CalendarDay', () => {
   describe('#onDayMouseLeave', () => {
     let onDayMouseLeaveSpy;
     beforeEach(() => {
-      onDayMouseLeaveSpy = sinon.spy(PureCalendarDay.prototype, 'onDayMouseLeave');
+      onDayMouseLeaveSpy = sinon.spy(
+        PureCalendarDay.prototype,
+        'onDayMouseLeave',
+      );
     });
 
     it('gets triggered by mouseleave', () => {
@@ -340,7 +327,9 @@ describe('CalendarDay', () => {
 
     it('calls props.onDayMouseLeave', () => {
       const onMouseLeaveStub = sinon.stub();
-      const wrapper = shallow(<CalendarDay onDayMouseLeave={onMouseLeaveStub} />).dive();
+      const wrapper = shallow(
+        <CalendarDay onDayMouseLeave={onMouseLeaveStub} />,
+      ).dive();
       wrapper.instance().onDayMouseLeave();
       expect(onMouseLeaveStub).to.have.property('callCount', 1);
     });
